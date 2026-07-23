@@ -1,0 +1,301 @@
+{
+  "settings": {
+    "templeName": "Mevakkatu Shree Nagaraja Kshetram",
+    "tagline": "A Sacred Abode of Serpent Divinity",
+    "openingHours": "Morning: 05:00 AM - 11:30 AM | Evening: 05:00 PM - 07:30 PM",
+    "heroTitle": "Mevakkatu Shree Nagaraja Kshetram",
+    "heroSubtitle": "Experience the calm, sacred presence of serpent divinity amidst ancient Sarpa Kavu flora.",
+    "contactEmail": "info@mevakkatusheenagaraja.org",
+    "contactPhone": "+91 471 234 5678",
+    "emergencyPhone": "+91 984 701 2345",
+    "address": "Mevakkatu, Near Sacred Serpent Grove, Kerala 695001, India",
+    "dressCode": "Dhoti/Mundu for Gents (Shirts to be removed before entering the inner sanctum). Traditional Saree, Set Mundu, or Salwar for Ladies.",
+    "parking": "Ample parking available in the outer temple grounds for two-wheelers and light motor vehicles.",
+    "rules": [
+      "Footwear must be deposited at the outer counter.",
+      "Maintain silence in the inner sanctum and Sarpa Kavu.",
+      "Electronic gadgets & photography prohibited near the deity and Sarpa Kavu.",
+      "Follow the traditional counter-clockwise circumambulation."
+    ],
+    "photographyPolicy": "Photography allowed only in outer courtyard for personal non-commercial use. Strictly forbidden near Sarpa Kavu and Sanctum Sanctorum.",
+    "mapsUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15782.78453412586!2d76.94!3d8.52!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOMKwMzEnMTIuMCJOIDc2wrA1Nic0OC4wIkU!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+  },
+  "announcements": [
+    {
+      "id": "ann-1",
+      "message": "Annual Ayilyam Mahotsavam dates announced: Next month 14th to 16th. Special Noorum Palum online booking now open.",
+      "active": true,
+      "type": "festival"
+    }
+  ],
+  "timings": [
+    {
+      "id": "t-1",
+      "name": "Nirmalya Darshan & Abhishekam",
+      "time": "05:00 AM - 06:00 AM",
+      "description": "Opening of sanctum, holy bath of Nagadevatas with coconut water and sacred herbal water.",
+      "image": "https://images.unsplash.com/photo-1545652985-5edd365b12eb?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+      "id": "t-2",
+      "name": "Usha Pooja & Morning Archana",
+      "time": "06:30 AM - 07:30 AM",
+      "description": "Morning offerings accompanied by sacred chants and traditional Kerala temple percussion.",
+      "image": "https://images.unsplash.com/photo-1609137144813-7d9921338f24?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+      "id": "t-3",
+      "name": "Noorum Palum Offering at Sarpa Kavu",
+      "time": "08:30 AM - 10:00 AM",
+      "description": "Sacred serpent grove ritual offering turmeric, rice powder, tender coconut water, and cow milk.",
+      "image": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+      "id": "t-4",
+      "name": "Uchha Pooja & Temple Closure",
+      "time": "10:30 AM - 11:30 AM",
+      "description": "Noon offering of Palpayasam and floral tributes followed by sanctum closure.",
+      "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+      "id": "t-5",
+      "name": "Evening Reopening & Deeparadhana",
+      "time": "05:00 PM - 06:45 PM",
+      "description": "Illumination of hundreds of oil lamps around the temple shrine and divine oil lamp ceremony.",
+      "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop"
+    },
+    {
+      "id": "t-6",
+      "name": "Athazha Pooja & Night Closure",
+      "time": "07:00 PM - 07:30 PM",
+      "description": "Night prayers, floral pushpanjali, and closing of sanctum doors till next dawn.",
+      "image": "https://images.unsplash.com/photo-1514539079130-25950c84af65?q=80&w=800&auto=format&fit=crop"
+    }
+  ],
+  "events": [
+    {
+      "id": "ev-1",
+      "title": "Maha Ayilyam Mahotsavam",
+      "date": "2026-08-15",
+      "time": "04:30 AM onwards",
+      "location": "Sarpa Kavu & Main Sanctum",
+      "description": "The most revered monthly festival dedicated to Shree Nagaraja and Nagayakshi. Features grand Noorum Palum, Nagachamayam, and Sarpa Pattu.",
+      "schedule": [
+        "04:30 AM - Maha Nirmalya Darshanam",
+        "07:00 AM - Special Maha Milk Abhishekam",
+        "09:30 AM - Sarpa Kavu Noorum Palum",
+        "12:30 PM - Maha Prasada Oottu (Community Meal)",
+        "06:30 PM - Grand Deeparadhana & Pulluvan Pattu"
+      ],
+      "image": "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=800&auto=format&fit=crop",
+      "category": "Grand Festival"
+    },
+    {
+      "id": "ev-2",
+      "title": "Sarpa Bali & Rahu Dosha Nivarana",
+      "date": "2026-09-02",
+      "time": "05:30 PM - 08:30 PM",
+      "location": "Temple Outer Mandapam",
+      "description": "A deeply spiritual evening ritual performed for pacifying Sarpa Dosham, Rahu-Ketu obstacles, and ensuring family harmony.",
+      "schedule": [
+        "05:30 PM - Sankalpam & Kalasha Sthapana",
+        "06:45 PM - Sarpa Mandala Pooja",
+        "07:45 PM - Dravya Ahuti & Prasada Distribution"
+      ],
+      "image": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop",
+      "category": "Special Ritual"
+    },
+    {
+      "id": "ev-3",
+      "title": "Vishu Kani & Serpent Blessing",
+      "date": "2026-10-14",
+      "time": "05:00 AM - 11:30 AM",
+      "location": "Main Temple Hall",
+      "description": "Auspicious Kerala New Year celebrations with customary Vishukkani arrangement, Kani Kanal, and gold coin blessed prasadam.",
+      "schedule": [
+        "05:00 AM - Vishukkani Darshanam",
+        "06:30 AM - Vishu Kaineettam Distribution by Chief Priest",
+        "09:00 AM - Special Archana"
+      ],
+      "image": "https://images.unsplash.com/photo-1545652985-5edd365b12eb?q=80&w=800&auto=format&fit=crop",
+      "category": "Festival"
+    }
+  ],
+  "poojas": [
+    {
+      "id": "p-1",
+      "name": "Special Noorum Palum",
+      "description": "Traditional sacred mix of milk, turmeric powder, tender coconut water, and rice flour offered at the idol of Nagaraja in Sarpa Kavu.",
+      "price": 350,
+      "starsApplicable": ["All Birth Stars"],
+      "timing": "Daily Morning 08:30 AM",
+      "category": "Serpent Pooja"
+    },
+    {
+      "id": "p-2",
+      "name": "Maha Sarpa Bali Ritual",
+      "description": "Elaborate multi-priest ritual with intricate powder mandala (Kalamezhuthu) designed for removing Nagadosham and health obstacles.",
+      "price": 1500,
+      "starsApplicable": ["Ayilyam", "Makam", "Ketta", "Revathi", "All Stars"],
+      "timing": "Evening 06:00 PM on Special Days",
+      "category": "Grand Ritual"
+    },
+    {
+      "id": "p-3",
+      "name": "Rahu-Ketu Peeda Shanti Archana",
+      "description": "Special floral pushpanjali with holy chantings focused on relieving astrological affliction of planetary nodes.",
+      "price": 200,
+      "starsApplicable": ["All Birth Stars"],
+      "timing": "Daily Morning / Evening",
+      "category": "Archana"
+    },
+    {
+      "id": "p-4",
+      "name": "Nagachamayam & Manjal Abhishekam",
+      "description": "Adorning Nagadevatas with pure sandalwood paste, floral garlands, and turmeric bath.",
+      "price": 600,
+      "starsApplicable": ["All Birth Stars"],
+      "timing": "Daily Morning 06:30 AM",
+      "category": "Abhishekam"
+    },
+    {
+      "id": "p-5",
+      "name": "Palpayasam Offering",
+      "description": "Rich milk and rice dessert prepared in temple kitchen with pure cow milk and ghee as divine offering.",
+      "price": 150,
+      "starsApplicable": ["All Birth Stars"],
+      "timing": "Daily Noon 10:30 AM",
+      "category": "Nivedyam"
+    },
+    {
+      "id": "p-6",
+      "name": "Kadali Pazham Nivedyam & Archana",
+      "description": "Offering of plantain fruits and red flowers to appease Nagaraja.",
+      "price": 100,
+      "starsApplicable": ["All Birth Stars"],
+      "timing": "Daily Morning / Evening",
+      "category": "Nivedyam"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "g-1",
+      "title": "Sacred Serpent Grove (Sarpa Kavu)",
+      "category": "Sarpa Kavu",
+      "url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1200&auto=format&fit=crop",
+      "type": "image",
+      "album": "Sacred Flora"
+    },
+    {
+      "id": "g-2",
+      "title": "Evening Oil Lamp Illuminations",
+      "category": "Rituals",
+      "url": "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200&auto=format&fit=crop",
+      "type": "image",
+      "album": "Deeparadhana"
+    },
+    {
+      "id": "g-3",
+      "title": "Inner Shrine Entrance",
+      "category": "Architecture",
+      "url": "https://images.unsplash.com/photo-1545652985-5edd365b12eb?q=80&w=1200&auto=format&fit=crop",
+      "type": "image",
+      "album": "Temple Structure"
+    },
+    {
+      "id": "g-4",
+      "title": "Traditional Pulluvan Pattu Performance",
+      "category": "Festivals",
+      "url": "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=1200&auto=format&fit=crop",
+      "type": "image",
+      "album": "Cultural Heritage"
+    },
+    {
+      "id": "g-5",
+      "title": "Ancient Stone Idol Sculptures",
+      "category": "Idols",
+      "url": "https://images.unsplash.com/photo-1609137144813-7d9921338f24?q=80&w=1200&auto=format&fit=crop",
+      "type": "image",
+      "album": "Sacred Sculptures"
+    },
+    {
+      "id": "g-6",
+      "title": "Morning Floral Tributes",
+      "category": "Rituals",
+      "url": "https://images.unsplash.com/photo-1514539079130-25950c84af65?q=80&w=1200&auto=format&fit=crop",
+      "type": "image",
+      "album": "Deeparadhana"
+    }
+  ],
+  "faqs": [
+    {
+      "id": "faq-1",
+      "question": "What is the significance of Noorum Palum offering at Mevakkatu?",
+      "answer": "Noorum Palum is a sacred mixture of turmeric, rice powder, tender coconut water, and cow milk offered at the Sarpa Kavu to appease serpent deities. It is believed to cure skin ailments, bring peace to ancestral souls, and neutralize Rahu-Ketu doshas.",
+      "category": "Rituals"
+    },
+    {
+      "id": "faq-2",
+      "question": "Are visitors required to follow a specific dress code?",
+      "answer": "Yes. Men are requested to wear traditional Mundu/Dhoti without shirts inside the inner courtyard. Women should wear Sarees, Set Mundu, or traditional Salwar Kameez. Modern western attire is strictly discouraged.",
+      "category": "Visitor Guidelines"
+    },
+    {
+      "id": "faq-3",
+      "question": "How can remote devotees book poojas and receive receipts?",
+      "answer": "Devotees can browse the Poojas section on this website, select the desired offering, provide their Birth Star (Nakshatra) and Devotee Name, complete the payment online, and instantly download a digital receipt with a unique transaction reference.",
+      "category": "Pooja Booking"
+    },
+    {
+      "id": "faq-4",
+      "question": "Can I make tax-deductible or recurring monthly donations?",
+      "answer": "Yes. The temple donation portal supports one-time contributions as well as recurring monthly donations towards Sarpa Kavu ecological preservation, daily Annadanam, and temple restoration.",
+      "category": "Donations"
+    },
+    {
+      "id": "faq-5",
+      "question": "Is photography permitted inside the temple premises?",
+      "answer": "Photography is strictly forbidden inside the inner sanctum and near the Sarpa Kavu to preserve spiritual tranquility. Photography in the outer periphery for personal memory is permitted.",
+      "category": "Visitor Guidelines"
+    }
+  ],
+  "donations": [
+    {
+      "id": "don-101",
+      "donorName": "Dr. K. Ramanathan",
+      "email": "ramanathan@example.com",
+      "amount": 2500,
+      "frequency": "one-time",
+      "purpose": "Sarpa Kavu Ecological Conservation",
+      "receiptId": "REC-DON-2026-101",
+      "createdAt": "2026-07-20T10:30:00Z"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "book-101",
+      "devoteeName": "Ananthakrishnan Nair",
+      "star": "Ayilyam",
+      "poojaId": "p-1",
+      "poojaName": "Special Noorum Palum",
+      "date": "2026-08-15",
+      "amount": 350,
+      "paymentId": "PAY-SIM-98213",
+      "receiptId": "REC-POOJA-2026-101",
+      "status": "Confirmed",
+      "createdAt": "2026-07-22T14:20:00Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg-101",
+      "name": "Sunitha Menon",
+      "email": "sunitha.menon@example.com",
+      "phone": "+91 944 712 3456",
+      "subject": "Ayilyam Mahotsavam Accommodation Query",
+      "message": "Om Namah Shivaya. We plan to visit during the Ayilyam Mahotsavam next month. Could you inform us about nearby stay options?",
+      "date": "2026-07-21T09:15:00Z",
+      "status": "Unread"
+    }
+  ]
+}

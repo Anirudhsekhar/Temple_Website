@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Forum&family=Gloock&family=Manrope:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #0F1B16;
+  --color-surface: #18261F;
+  --color-border: #2A3A33;
+  --color-gold: #C6A15B;
+  --color-gold-hover: #D6B46E;
+  --color-forest: #23452F;
+  --color-sage: #8FA98B;
+  --color-text-primary: #F3EFE3;
+  --color-text-secondary: #C4C0B4;
+  --color-muted: #6D7B71;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: 'Manrope', sans-serif;
+}
+
+body {
+  background-color: #0F1B16;
+  color: #F3EFE3;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0F1B16;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2A3A33;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C6A15B;
+}
+
+/* Custom Selection */
+::selection {
+  background-color: #C6A15B;
+  color: #0F1B16;
+}
+
+/* Typography Utility Classes based on Brand Guidelines */
+.font-display {
+  font-family: 'Forum', serif;
+}
+
+.font-heading {
+  font-family: 'Gloock', serif;
+}
+
+.font-body {
+  font-family: 'Manrope', sans-serif;
+}
+
+/* Print Styles for Receipts */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-receipt, #printable-receipt * {
+    visibility: visible;
+  }
+  #printable-receipt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 24px;
+  }
+}
