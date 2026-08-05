@@ -13,7 +13,7 @@ export default function Button({
   icon: Icon = null,
   ...props
 }) {
-  const baseStyles = "inline-flex items-center justify-center font-body font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#C6A15B] focus:ring-offset-2 focus:ring-offset-[#0F1B16] disabled:opacity-50 disabled:cursor-not-allowed tracking-[0.06em]";
+  const baseStyles = "inline-flex items-center justify-center font-body font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#9B7A41] focus:ring-offset-2 focus:ring-offset-[#0D1A12] disabled:opacity-50 disabled:cursor-not-allowed tracking-[0.06em]";
   
   const sizeStyles = {
     sm: "px-4 py-2 text-sm rounded-lg gap-2",
@@ -22,9 +22,9 @@ export default function Button({
   };
 
   const variantStyles = {
-    primary: "bg-[#C6A15B] text-[#0F1B16] hover:bg-[#D6B46E] shadow-gold font-bold",
-    secondary: "bg-transparent text-[#F3EFE3] border border-[#2A3A33] hover:border-[#C6A15B] hover:text-[#C6A15B]",
-    ghost: "bg-transparent text-[#C4C0B4] hover:text-[#F3EFE3] hover:bg-[#18261F]"
+    primary: "bg-[#9B7A41] text-[#F7F2E7] hover:bg-[#4F7A4D] shadow-md font-bold border border-[#5E645A]",
+    secondary: "bg-[#233728] text-[#F7F2E7] border border-[#5E645A] hover:border-[#9B7A41] hover:text-[#9B7A41]",
+    ghost: "bg-transparent text-[#D8D5C8] hover:text-[#F7F2E7] hover:bg-[#233728]"
   };
 
   return (

@@ -5,31 +5,44 @@
 @tailwind utilities;
 
 :root {
-  --color-bg: #0F1B16;
-  --color-surface: #18261F;
-  --color-border: #2A3A33;
-  --color-gold: #C6A15B;
-  --color-gold-hover: #D6B46E;
-  --color-forest: #23452F;
-  --color-sage: #8FA98B;
-  --color-text-primary: #F3EFE3;
-  --color-text-secondary: #C4C0B4;
-  --color-muted: #6D7B71;
+  --color-bg: #0D1A12; /* Deep Forest */
+  --color-surface: #233728; /* Moss */
+  --color-secondary-bg: #3A2D25; /* Wet Bark */
+  --color-border: #5E645A; /* Ancient Stone */
+  --color-highlight: #F7F2E7; /* Elanji Flower */
+  --color-text: #D8D5C8; /* Mist */
+  --color-bronze: #9B7A41; /* Sacred Bronze */
+  --color-leaf: #4F7A4D; /* Fresh Leaf */
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--color-bg);
-  color: var(--color-text-primary);
+  background-color: #0D1A12;
+  color: #F7F2E7;
   font-family: 'Manrope', sans-serif;
 }
 
 body {
-  background-color: #0F1B16;
-  color: #F3EFE3;
+  background-color: #0D1A12;
+  color: #D8D5C8;
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Subtle Organic Grove Background Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.18;
+  background-image: 
+    radial-gradient(circle at 15% 20%, rgba(79, 122, 77, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 85% 75%, rgba(155, 122, 65, 0.15) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(58, 45, 37, 0.3) 0%, transparent 60%);
 }
 
 /* Custom Scrollbar */
@@ -38,22 +51,22 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0F1B16;
+  background: #0D1A12;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2A3A33;
+  background: #5E645A;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #C6A15B;
+  background: #9B7A41;
 }
 
 /* Custom Selection */
 ::selection {
-  background-color: #C6A15B;
-  color: #0F1B16;
+  background-color: #9B7A41;
+  color: #0D1A12;
 }
 
 /* Typography Utility Classes based on Brand Guidelines */
@@ -69,21 +82,48 @@ body {
   font-family: 'Manrope', sans-serif;
 }
 
-/* Print Styles for Receipts */
+/* Print Styles for Receipts (Optimized White Background & Black Text) */
 @media print {
+  @page {
+    margin: 15mm;
+    size: auto;
+  }
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
   body * {
-    visibility: hidden;
+    visibility: hidden !important;
   }
   #printable-receipt, #printable-receipt * {
-    visibility: visible;
+    visibility: visible !important;
   }
   #printable-receipt {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
     background: #ffffff !important;
     color: #000000 !important;
-    padding: 24px;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  #printable-receipt button,
+  #printable-receipt .no-print {
+    display: none !important;
+  }
+  #printable-receipt div,
+  #printable-receipt p,
+  #printable-receipt span,
+  #printable-receipt h3,
+  #printable-receipt h4 {
+    color: #000000 !important;
+    background-color: transparent !important;
+    border-color: #cccccc !important;
   }
 }

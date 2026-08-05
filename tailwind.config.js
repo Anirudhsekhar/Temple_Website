@@ -9,18 +9,17 @@ module.exports = {
     extend: {
       colors: {
         temple: {
-          bg: "#0F1B16",
-          surface: "#18261F",
-          border: "#2A3A33",
-          primary: "#C6A15B",
-          secondary: "#23452F",
-          accent: "#8FA98B",
-          success: "#4F8A5B",
-          warning: "#D88A2D",
-          textPrimary: "#F3EFE3",
-          textSecondary: "#C4C0B4",
-          muted: "#6D7B71",
-          hover: "#D6B46E",
+          bg: "#0D1A12", // Deep Forest
+          surface: "#233728", // Moss
+          secondaryBg: "#3A2D25", // Wet Bark
+          border: "#5E645A", // Ancient Stone
+          primary: "#9B7A41", // Sacred Bronze
+          accent: "#4F7A4D", // Fresh Leaf
+          highlightText: "#F7F2E7", // Elanji Flower
+          textPrimary: "#F7F2E7",
+          textSecondary: "#D8D5C8", // Mist
+          muted: "#5E645A",
+          hover: "#4F7A4D",
         },
       },
       fontFamily: {

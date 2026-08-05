@@ -11,10 +11,10 @@ export default function Card({
 }) {
   return (
     <motion.div
-      whileHover={hoverEffect ? { y: -4, borderColor: '#C6A15B' } : {}}
+      whileHover={hoverEffect ? { y: -4, borderColor: '#9B7A41' } : {}}
       transition={{ duration: 0.3, ease: 'easeOut' }}
       onClick={onClick}
-      className={`bg-[#18261F] border border-[#2A3A33] rounded-[20px] p-6 shadow-soft transition-colors duration-300 ${onClick ? 'cursor-pointer' : ''} ${className}`}
+      className={`bg-[#233728] border border-[#5E645A] rounded-[20px] p-6 shadow-soft transition-colors duration-300 ${onClick ? 'cursor-pointer' : ''} ${className}`}
       {...props}
     >
       {children}

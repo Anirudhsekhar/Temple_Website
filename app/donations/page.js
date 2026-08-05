@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Heart, CreditCard, ShieldCheck, Loader2, Sparkles } from 'lucide-react';
+import { CreditCard, ShieldCheck, Loader2, Sparkles } from 'lucide-react';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import ReceiptModal from '@/components/ReceiptModal';
@@ -52,17 +52,17 @@ export default function DonationsPage() {
   const currentTotal = customAmount ? Number(customAmount) : amount;
 
   return (
-    <div className="py-16 px-5 sm:px-8 lg:px-12 max-w-5xl mx-auto space-y-12">
+    <div className="py-16 px-5 sm:px-8 lg:px-12 max-w-5xl mx-auto space-y-12 text-[#D8D5C8]">
       
       {/* Header */}
       <div className="text-center space-y-4 max-w-3xl mx-auto">
-        <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#C6A15B]">
+        <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9B7A41]">
           Divine Support
         </span>
-        <h1 className="font-heading text-4xl sm:text-5xl text-[#F3EFE3] tracking-[0.03em]">
+        <h1 className="font-heading text-4xl sm:text-5xl text-[#F7F2E7] tracking-[0.03em]">
           Online Temple Donation & Seva
         </h1>
-        <p className="font-body text-base text-[#C4C0B4] leading-relaxed">
+        <p className="font-body text-base text-[#D8D5C8] leading-relaxed">
           Support ancient Sarpa Kavu rainforest preservation, daily free meal distribution (Annadanam), and traditional temple restoration.
         </p>
       </div>
@@ -75,7 +75,7 @@ export default function DonationsPage() {
             
             {/* Frequency Selection */}
             <div className="space-y-2">
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#C4C0B4]">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#D8D5C8]">
                 Donation Frequency
               </label>
               <div className="grid grid-cols-2 gap-3">
@@ -84,8 +84,8 @@ export default function DonationsPage() {
                   onClick={() => setFrequency('one-time')}
                   className={`py-3 rounded-xl text-sm font-semibold border transition-all ${
                     frequency === 'one-time'
-                      ? 'bg-[#C6A15B] text-[#0F1B16] border-[#C6A15B]'
-                      : 'bg-[#0F1B16] text-[#C4C0B4] border-[#2A3A33]'
+                      ? 'bg-[#9B7A41] text-[#F7F2E7] border-[#5E645A]'
+                      : 'bg-[#0D1A12] text-[#D8D5C8] border-[#5E645A]'
                   }`}
                 >
                   One-Time Offering
@@ -95,8 +95,8 @@ export default function DonationsPage() {
                   onClick={() => setFrequency('monthly')}
                   className={`py-3 rounded-xl text-sm font-semibold border transition-all ${
                     frequency === 'monthly'
-                      ? 'bg-[#C6A15B] text-[#0F1B16] border-[#C6A15B]'
-                      : 'bg-[#0F1B16] text-[#C4C0B4] border-[#2A3A33]'
+                      ? 'bg-[#9B7A41] text-[#F7F2E7] border-[#5E645A]'
+                      : 'bg-[#0D1A12] text-[#D8D5C8] border-[#5E645A]'
                   }`}
                 >
                   Recurring Monthly Seva
@@ -106,13 +106,13 @@ export default function DonationsPage() {
 
             {/* Purpose */}
             <div className="space-y-2">
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#C4C0B4]">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#D8D5C8]">
                 Select Contribution Purpose
               </label>
               <select
                 value={purpose}
                 onChange={(e) => setPurpose(e.target.value)}
-                className="w-full bg-[#0F1B16] border border-[#2A3A33] rounded-xl px-4 py-3 text-sm text-[#F3EFE3] focus:outline-none focus:border-[#C6A15B]"
+                className="w-full bg-[#0D1A12] border border-[#5E645A] rounded-xl px-4 py-3 text-sm text-[#F7F2E7] focus:outline-none focus:border-[#9B7A41]"
               >
                 <option value="Sarpa Kavu Ecological Conservation">Sarpa Kavu Ecological Conservation</option>
                 <option value="Daily Prasada Annadanam">Daily Prasada Annadanam</option>
@@ -123,7 +123,7 @@ export default function DonationsPage() {
 
             {/* Amount Buttons */}
             <div className="space-y-2">
-              <label className="block text-xs font-semibold uppercase tracking-wider text-[#C4C0B4]">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#D8D5C8]">
                 Select Amount (INR)
               </label>
               <div className="grid grid-cols-4 gap-2">
@@ -134,8 +134,8 @@ export default function DonationsPage() {
                     onClick={() => { setAmount(amt); setCustomAmount(''); }}
                     className={`py-2.5 rounded-xl text-sm font-bold border transition-all ${
                       amount === amt && !customAmount
-                        ? 'bg-[#23452F] text-[#C6A15B] border-[#C6A15B]'
-                        : 'bg-[#0F1B16] text-[#F3EFE3] border-[#2A3A33]'
+                        ? 'bg-[#4F7A4D] text-[#F7F2E7] border-[#9B7A41]'
+                        : 'bg-[#0D1A12] text-[#F7F2E7] border-[#5E645A]'
                     }`}
                   >
                     ₹{amt}
@@ -147,14 +147,14 @@ export default function DonationsPage() {
                 placeholder="Or enter custom amount (₹)"
                 value={customAmount}
                 onChange={(e) => setCustomAmount(e.target.value)}
-                className="w-full bg-[#0F1B16] border border-[#2A3A33] rounded-xl px-4 py-3 text-sm text-[#F3EFE3] placeholder-[#6D7B71] focus:outline-none focus:border-[#C6A15B]"
+                className="w-full bg-[#0D1A12] border border-[#5E645A] rounded-xl px-4 py-3 text-sm text-[#F7F2E7] placeholder-[#5E645A] focus:outline-none focus:border-[#9B7A41]"
               />
             </div>
 
             {/* Devotee Info */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#C4C0B4]">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#D8D5C8]">
                   Full Name *
                 </label>
                 <input
@@ -163,12 +163,12 @@ export default function DonationsPage() {
                   placeholder="Devotee Name"
                   value={donorName}
                   onChange={(e) => setDonorName(e.target.value)}
-                  className="w-full bg-[#0F1B16] border border-[#2A3A33] rounded-xl px-4 py-3 text-sm text-[#F3EFE3] focus:outline-none focus:border-[#C6A15B]"
+                  className="w-full bg-[#0D1A12] border border-[#5E645A] rounded-xl px-4 py-3 text-sm text-[#F7F2E7] focus:outline-none focus:border-[#9B7A41]"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#C4C0B4]">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#D8D5C8]">
                   Email Address *
                 </label>
                 <input
@@ -177,7 +177,7 @@ export default function DonationsPage() {
                   placeholder="email@example.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-[#0F1B16] border border-[#2A3A33] rounded-xl px-4 py-3 text-sm text-[#F3EFE3] focus:outline-none focus:border-[#C6A15B]"
+                  className="w-full bg-[#0D1A12] border border-[#5E645A] rounded-xl px-4 py-3 text-sm text-[#F7F2E7] focus:outline-none focus:border-[#9B7A41]"
                 />
               </div>
             </div>
@@ -189,7 +189,7 @@ export default function DonationsPage() {
               size="lg"
               className="w-full"
               disabled={loading || !donorName || !email || !currentTotal}
-              icon={loading ? Loader2 : Heart}
+              icon={loading ? Loader2 : CreditCard}
             >
               {loading ? 'Processing Offering...' : `Donate ₹${currentTotal || 0} Online`}
             </Button>
@@ -199,17 +199,17 @@ export default function DonationsPage() {
         {/* Info Column */}
         <div className="lg:col-span-5 space-y-6">
           <Card className="space-y-4">
-            <h3 className="font-heading text-xl text-[#F3EFE3]">Why Your Contribution Matters</h3>
-            <p className="text-sm text-[#C4C0B4] leading-relaxed">
+            <h3 className="font-heading text-xl text-[#F7F2E7]">Why Your Contribution Matters</h3>
+            <p className="text-sm text-[#D8D5C8] leading-relaxed">
               Mevakkatu Shree Nagaraja Kshetram Trust relies entirely on voluntary offerings to protect the ancient Sarpa Kavu rainforest, perform traditional Tantric rites, and serve hot meals to pilgrims.
             </p>
-            <div className="pt-2 border-t border-[#2A3A33] space-y-3 text-xs text-[#8FA98B]">
+            <div className="pt-2 border-t border-[#5E645A] space-y-3 text-xs text-[#4F7A4D]">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#C6A15B]" />
+                <ShieldCheck className="w-4 h-4 text-[#9B7A41]" />
                 <span>Automated 80G Tax Exemption Digital Receipt</span>
               </div>
               <div className="flex items-center gap-2">
-                <CreditCard className="w-4 h-4 text-[#C6A15B]" />
+                <CreditCard className="w-4 h-4 text-[#9B7A41]" />
                 <span>100% Encrypted Payment Security</span>
               </div>
             </div>

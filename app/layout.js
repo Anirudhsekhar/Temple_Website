@@ -2,6 +2,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AnnouncementBanner from '@/components/AnnouncementBanner';
+import FloatingContactButton from '@/components/FloatingContactButton';
 
 export const metadata = {
   title: 'Mevakkatu Shree Nagaraja Kshetram | Sacred Serpent Temple Kerala',
@@ -20,12 +21,13 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="bg-[#0F1B16] text-[#F3EFE3] flex flex-col min-h-screen selection:bg-[#C6A15B] selection:text-[#0F1B16]">
+      <body className="bg-[#0D1A12] text-[#F7F2E7] flex flex-col min-h-screen selection:bg-[#9B7A41] selection:text-[#0D1A12]">
         <AnnouncementBanner />
         <Navbar />
         <main className="flex-grow">
           {children}
         </main>
+        <FloatingContactButton />
         <Footer />
       </body>
     </html>

@@ -4,28 +4,26 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
-  Sparkles,
   Calendar,
   Clock,
   MapPin,
   ChevronRight,
   ShieldCheck,
-  Heart,
   ArrowRight,
   Flower2,
-  TreePine,
-  CheckCircle2,
-  Phone
+  ChevronLeft
 } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import PoojaBookingModal from '@/components/PoojaBookingModal';
+import NagaLogo from '@/components/NagaLogo';
 
 export default function HomePage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedPooja, setSelectedPooja] = useState(null);
   const [bookingOpen, setBookingOpen] = useState(false);
+  const [carouselIdx, setCarouselIdx] = useState(0);
 
   useEffect(() => {
     async function loadData() {
@@ -69,34 +67,47 @@ export default function HomePage() {
   const timings = data?.timings || [];
   const events = data?.events || [];
   const poojas = data?.poojas || [];
-  const gallery = data?.gallery || [];
+  const gallery = (data?.gallery || []).slice(0, 3); // Display exactly 3 images on homepage about carousel
+
+  const nextSlide = () => {
+    if (gallery.length > 0) {
+      setCarouselIdx((prev) => (prev + 1) % gallery.length);
+    }
+  };
+
+  const prevSlide = () => {
+    if (gallery.length > 0) {
+      setCarouselIdx((prev) => (prev - 1 + gallery.length) % gallery.length);
+    }
+  };
 
   return (
-    <div className="space-y-0">
+    <div className="space-y-0 text-[#D8D5C8]">
       
       {/* ----------------------------------------------------
-          SECTION 1: HERO SECTION
+          SECTION 1: HERO SECTION (Sacred Grove Canopy & Mist)
       ---------------------------------------------------- */}
-      <section className="relative min-h-[85vh] flex items-center justify-center pt-12 pb-20 px-5 sm:px-8 overflow-hidden bg-[#0F1B16]">
-        {/* Ambient Dark Overlay with Soft Glow */}
-        <div className="absolute inset-0 z-0 opacity-25 mix-blend-overlay pointer-events-none bg-[radial-gradient(#C6A15B_1px,transparent_1px)] [background-size:24px_24px]" />
+      <section className="relative min-h-[90vh] flex items-center justify-center pt-16 pb-24 px-5 sm:px-8 overflow-hidden bg-[#0D1A12]">
+        {/* Subtle Elanji Tree & Mist Layers */}
+        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none bg-[radial-gradient(#9B7A41_1px,transparent_1px)] [background-size:32px_32px]" />
+        <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#0D1A12] via-[#233728]/40 to-transparent pointer-events-none z-0" />
         
         <div className="relative z-10 max-w-4xl mx-auto text-center space-y-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#18261F] border border-[#2A3A33] text-xs font-semibold uppercase tracking-[0.12em] text-[#C6A15B]"
+            className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-[#233728] border border-[#5E645A] text-xs font-semibold uppercase tracking-[0.18em] text-[#9B7A41]"
           >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Spiritual Sanctuary in Kerala</span>
+            <NagaLogo className="w-5 h-5" color="#9B7A41" />
+            <span>Sacred Serpent Sanctuary • Kerala</span>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.15 }}
-            className="font-display text-4xl sm:text-6xl lg:text-7xl font-normal text-[#F3EFE3] leading-[1.1] tracking-[0.08em]"
+            transition={{ duration: 0.9, delay: 0.15 }}
+            className="font-display text-4xl sm:text-6xl lg:text-7xl font-normal text-[#F7F2E7] leading-[1.15] tracking-[0.06em]"
           >
             {settings.heroTitle || 'Mevakkatu Shree Nagaraja Kshetram'}
           </motion.h1>
@@ -104,17 +115,17 @@ export default function HomePage() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="font-body text-lg sm:text-xl text-[#C4C0B4] max-w-2xl mx-auto leading-relaxed"
+            transition={{ duration: 0.9, delay: 0.3 }}
+            className="font-body text-base sm:text-xl text-[#D8D5C8] max-w-2xl mx-auto leading-relaxed"
           >
-            {settings.heroSubtitle || 'Experience the calm, sacred presence of serpent divinity amidst ancient Sarpa Kavu flora.'}
+            {settings.tagline || 'Where Sacred Flora and Ancient Serpent Spirits Abide'}
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.45 }}
-            className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4"
+            transition={{ duration: 0.9, delay: 0.45 }}
+            className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Button
               variant="primary"
@@ -126,7 +137,7 @@ export default function HomePage() {
             </Button>
             <Link href="#daily-rituals">
               <Button variant="secondary" size="lg" icon={Clock}>
-                Explore Daily Rituals
+                Explore Daily Timings
               </Button>
             </Link>
           </motion.div>
@@ -135,81 +146,120 @@ export default function HomePage() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="pt-6 border-t border-[#2A3A33]/80 inline-flex flex-wrap items-center justify-center gap-6 text-sm text-[#8FA98B]"
+            transition={{ duration: 0.9, delay: 0.6 }}
+            className="pt-8 border-t border-[#5E645A]/50 inline-flex flex-wrap items-center justify-center gap-6 text-sm text-[#4F7A4D]"
           >
             <span className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-[#C6A15B]" />
-              <span>Morning: <strong>05:00 AM - 11:30 AM</strong></span>
+              <Clock className="w-4 h-4 text-[#9B7A41]" />
+              <span>Morning: <strong className="text-[#F7F2E7]">05:00 AM - 11:30 AM</strong></span>
             </span>
-            <span className="hidden sm:inline text-[#2A3A33]">|</span>
+            <span className="hidden sm:inline text-[#5E645A]">|</span>
             <span className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-[#C6A15B]" />
-              <span>Evening: <strong>05:00 PM - 07:30 PM</strong></span>
+              <Clock className="w-4 h-4 text-[#9B7A41]" />
+              <span>Evening: <strong className="text-[#F7F2E7]">05:00 PM - 07:30 PM</strong></span>
             </span>
           </motion.div>
         </div>
       </section>
 
       {/* ----------------------------------------------------
-          SECTION 2: TEMPLE INTRODUCTION
+          SECTION 2: ABOUT & HISTORY MERGED SECTION (With 3-Image Carousel)
       ---------------------------------------------------- */}
-      <section className="py-20 px-5 sm:px-8 lg:px-12 bg-[#18261F]/40 border-y border-[#2A3A33]">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 space-y-6">
-            <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#C6A15B] block">
-              Sacred Heritage
-            </span>
-            <h2 className="font-heading text-3xl sm:text-4xl text-[#F3EFE3] tracking-[0.03em] leading-tight">
-              A Quiet Sanctuary of Serpent Divinity & Sacred Flora
-            </h2>
-            <p className="font-body text-base sm:text-lg text-[#C4C0B4] leading-relaxed">
-              Mevakkatu Shree Nagaraja Kshetram is a centuries-old Kerala temple renowned for its unblemished spiritual peace and natural sacred grove (Sarpa Kavu). Here, the serpent gods Shree Nagaraja, Nagayakshi, and Nagachamundi are revered as guardians of ecological equilibrium and lineage prosperity.
-            </p>
-            <p className="font-body text-sm sm:text-base text-[#8FA98B] leading-relaxed">
-              Devotees visit from across the nation to seek freedom from Rahu-Ketu astrological doshas, skin afflictions, and ancestral burdens through traditional Noorum Palum offerings and Sarpa Bali.
-            </p>
-            <div className="pt-2">
-              <Link href="/about">
-                <Button variant="secondary" size="md" icon={ArrowRight}>
-                  Learn More About Our Philosophy
-                </Button>
-              </Link>
+      <section className="py-20 px-5 sm:px-8 lg:px-12 bg-[#233728]/30 border-y border-[#5E645A]/50">
+        <div className="max-w-6xl mx-auto space-y-16">
+          
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-6 space-y-6">
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9B7A41] block">
+                The Sacred Grove Tradition
+              </span>
+              <h2 className="font-heading text-3xl sm:text-4xl text-[#F7F2E7] tracking-[0.03em] leading-tight">
+                An Ancient Sanctuary of Serpent Divinity & Sacred Flora
+              </h2>
+              <p className="font-body text-base text-[#D8D5C8] leading-relaxed">
+                Mevakkatu Shree Nagaraja Kshetram is a centuries-old Kerala temple renowned for its unblemished spiritual peace and natural sacred grove (Sarpa Kavu). Here, the serpent gods Shree Nagaraja, Nagayakshi, and Nagachamundi are revered as guardians of ecological equilibrium and lineage prosperity.
+              </p>
+              <p className="font-body text-sm text-[#4F7A4D] leading-relaxed">
+                <strong>Ancient Origin & History:</strong> Legend recounts that centuries ago, local agriculturalists struck a Swayambhu idol that bled holy white milk. The land was consecrated as an inviolable Sarpa Kavu bio-reserve.
+              </p>
+              <div className="pt-2">
+                <Link href="/about">
+                  <Button variant="secondary" size="md" icon={ArrowRight}>
+                    Read Complete History & About
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* 3-Image Carousel inside About section */}
+            <div className="lg:col-span-6 relative">
+              {gallery.length > 0 ? (
+                <div className="relative h-80 sm:h-96 w-full rounded-[24px] overflow-hidden border border-[#5E645A] shadow-soft group">
+                  <Image
+                    src={gallery[carouselIdx]?.url || "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800&auto=format&fit=crop"}
+                    alt={gallery[carouselIdx]?.title || "Sacred Grove"}
+                    fill
+                    className="object-cover transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1A12] via-transparent to-transparent opacity-75" />
+                  
+                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs">
+                    <div>
+                      <span className="text-[#9B7A41] uppercase tracking-wider block font-semibold text-[10px]">
+                        {gallery[carouselIdx]?.category || 'Sacred Grove'}
+                      </span>
+                      <span className="text-[#F7F2E7] font-heading text-sm">
+                        {gallery[carouselIdx]?.title}
+                      </span>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <button
+                        onClick={prevSlide}
+                        className="p-2 rounded-full bg-[#0D1A12]/80 hover:bg-[#9B7A41] text-[#F7F2E7] transition-colors"
+                        aria-label="Previous Slide"
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={nextSlide}
+                        className="p-2 rounded-full bg-[#0D1A12]/80 hover:bg-[#9B7A41] text-[#F7F2E7] transition-colors"
+                        aria-label="Next Slide"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="h-80 w-full rounded-[24px] bg-[#233728] border border-[#5E645A] flex items-center justify-center text-[#5E645A]">
+                  Sacred Gallery Loading...
+                </div>
+              )}
             </div>
           </div>
 
-          <div className="lg:col-span-5 relative">
-            <div className="relative h-80 sm:h-96 w-full rounded-[24px] overflow-hidden border border-[#2A3A33] shadow-soft">
-              <Image
-                src="https://images.unsplash.com/photo-1545652985-5edd365b12eb?q=80&w=800&auto=format&fit=crop"
-                alt="Mevakkatu Temple Architecture"
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F1B16] via-transparent to-transparent opacity-60" />
-            </div>
-          </div>
         </div>
       </section>
 
       {/* ----------------------------------------------------
-          SECTION 3: TEMPLE HISTORY PREVIEW
+          SECTION 3: MIDDLE CTA - "VIEW FESTIVALS"
       ---------------------------------------------------- */}
-      <section className="py-20 px-5 sm:px-8 lg:px-12 bg-[#0F1B16]">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#C6A15B]">
-            Ancient Origin
+      <section className="py-16 px-5 sm:px-8 bg-[#3A2D25]/40 border-b border-[#5E645A]/50">
+        <div className="max-w-5xl mx-auto text-center space-y-6">
+          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9B7A41]">
+            Annual Celebrations & Rites
           </span>
-          <h2 className="font-heading text-3xl sm:text-4xl text-[#F3EFE3] tracking-[0.03em]">
-            Centuries of Spiritual Continuity
+          <h2 className="font-heading text-3xl sm:text-4xl text-[#F7F2E7]">
+            Experience Ayilyam Mahotsavam & Sarpa Bali
           </h2>
-          <p className="font-body text-base sm:text-lg text-[#C4C0B4] leading-relaxed max-w-2xl mx-auto">
-            Rooted in Kerala's ancient tradition of honoring nature and serpentine protectors, Mevakkatu temple has preserved its pristine Sarpa Kavu ecosystem without commercial alteration for generations.
+          <p className="text-sm sm:text-base text-[#D8D5C8] max-w-2xl mx-auto leading-relaxed">
+            Join the sacred chants, Pulluvan Pattu, and traditional Noorum Palum offerings performed during upcoming festival dates.
           </p>
-          <div className="pt-4">
-            <Link href="/history">
-              <Button variant="ghost" size="md" icon={ChevronRight}>
-                Read Full Temple History
+          <div className="pt-2">
+            <Link href="/events">
+              <Button variant="primary" size="lg" icon={Calendar}>
+                View All Festivals
               </Button>
             </Link>
           </div>
@@ -217,63 +267,18 @@ export default function HomePage() {
       </section>
 
       {/* ----------------------------------------------------
-          SECTION 4: SACRED GROVE (SARPA KAVU)
+          SECTION 4: DAILY RITUALS & TIMINGS
       ---------------------------------------------------- */}
-      <section className="py-20 px-5 sm:px-8 lg:px-12 bg-[#18261F] border-y border-[#2A3A33]">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-5 order-2 lg:order-1 relative">
-            <div className="relative h-80 sm:h-96 w-full rounded-[24px] overflow-hidden border border-[#2A3A33]">
-              <Image
-                src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800&auto=format&fit=crop"
-                alt="Sarpa Kavu Flora"
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-          </div>
-
-          <div className="lg:col-span-7 order-1 lg:order-2 space-y-6">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-[#8FA98B]">
-              <TreePine className="w-4 h-4 text-[#C6A15B]" />
-              <span>Sacred Ecology</span>
-            </div>
-            <h2 className="font-heading text-3xl sm:text-4xl text-[#F3EFE3] tracking-[0.03em]">
-              The Sarpa Kavu Sanctuary
-            </h2>
-            <p className="font-body text-base text-[#C4C0B4] leading-relaxed">
-              The Sarpa Kavu at Mevakkatu is a mini rainforest micro-climate housing rare medicinal herbs, ancient creepers, and carved granite serpent idols (Chithrakootam). Devotees enter with quiet reverence, feeling the cool divine energy that permeates the sacred trees.
-            </p>
-            <ul className="space-y-3 text-sm text-[#8FA98B]">
-              <li className="flex items-center gap-3">
-                <CheckCircle2 className="w-4 h-4 text-[#C6A15B] shrink-0" />
-                <span>Untouched natural forest preserve dedicated exclusively to serpent deities</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <CheckCircle2 className="w-4 h-4 text-[#C6A15B] shrink-0" />
-                <span>Morning rituals of milk and turmeric (Noorum Palum) performed daily</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <CheckCircle2 className="w-4 h-4 text-[#C6A15B] shrink-0" />
-                <span>Habitat for indigenous species maintaining ecological harmony</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* ----------------------------------------------------
-          SECTION 5: DAILY RITUALS & TIMINGS
-      ---------------------------------------------------- */}
-      <section id="daily-rituals" className="py-20 px-5 sm:px-8 lg:px-12 bg-[#0F1B16]">
+      <section id="daily-rituals" className="py-20 px-5 sm:px-8 lg:px-12 bg-[#0D1A12]">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center space-y-4 max-w-2xl mx-auto">
-            <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#C6A15B]">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9B7A41]">
               Sacred Schedule
             </span>
-            <h2 className="font-heading text-3xl sm:text-4xl text-[#F3EFE3]">
+            <h2 className="font-heading text-3xl sm:text-4xl text-[#F7F2E7]">
               Daily Rituals & Pooja Timings
             </h2>
-            <p className="text-sm text-[#C4C0B4]">
+            <p className="text-sm text-[#D8D5C8]">
               Rituals at Mevakkatu follow authentic Kerala Tantric rites handed down through traditional priest lineages.
             </p>
           </div>
@@ -282,7 +287,7 @@ export default function HomePage() {
             {timings.map((item) => (
               <Card key={item.id} className="space-y-4 flex flex-col justify-between">
                 <div>
-                  <div className="relative h-44 w-full rounded-xl overflow-hidden mb-4 border border-[#2A3A33]">
+                  <div className="relative h-44 w-full rounded-xl overflow-hidden mb-4 border border-[#5E645A]">
                     <Image
                       src={item.image || "https://images.unsplash.com/photo-1609137144813-7d9921338f24?q=80&w=800&auto=format&fit=crop"}
                       alt={item.name}
@@ -290,19 +295,19 @@ export default function HomePage() {
                       className="object-cover"
                     />
                   </div>
-                  <span className="inline-block px-3 py-1 rounded-md bg-[#0F1B16] text-xs font-semibold text-[#C6A15B] border border-[#2A3A33] mb-2">
+                  <span className="inline-block px-3 py-1 rounded-md bg-[#0D1A12] text-xs font-semibold text-[#9B7A41] border border-[#5E645A] mb-2">
                     {item.time}
                   </span>
-                  <h3 className="font-heading text-lg text-[#F3EFE3] font-normal">
+                  <h3 className="font-heading text-lg text-[#F7F2E7] font-normal">
                     {item.name}
                   </h3>
-                  <p className="text-sm text-[#C4C0B4] mt-2 line-clamp-3 leading-relaxed">
+                  <p className="text-sm text-[#D8D5C8] mt-2 line-clamp-3 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-[#2A3A33]/50 flex justify-between items-center text-xs text-[#8FA98B]">
+                <div className="pt-2 border-t border-[#5E645A]/50 flex justify-between items-center text-xs text-[#4F7A4D]">
                   <span>Daily Darshan</span>
-                  <Flower2 className="w-4 h-4 text-[#C6A15B]" />
+                  <Flower2 className="w-4 h-4 text-[#9B7A41]" />
                 </div>
               </Card>
             ))}
@@ -311,52 +316,50 @@ export default function HomePage() {
       </section>
 
       {/* ----------------------------------------------------
-          SECTION 6: UPCOMING FESTIVALS
+          SECTION 5: REDUCED HOMEPAGE POOJAS (Top 3 Poojas)
       ---------------------------------------------------- */}
-      <section className="py-20 px-5 sm:px-8 lg:px-12 bg-[#18261F]/40 border-y border-[#2A3A33]">
+      <section className="py-20 px-5 sm:px-8 lg:px-12 bg-[#233728]/30 border-y border-[#5E645A]/50">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
             <div>
-              <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#C6A15B] block mb-2">
-                Celebrations
+              <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9B7A41] block mb-2">
+                Sacred Offerings
               </span>
-              <h2 className="font-heading text-3xl sm:text-4xl text-[#F3EFE3]">
-                Upcoming Festivals & Mahotsavams
+              <h2 className="font-heading text-3xl sm:text-4xl text-[#F7F2E7]">
+                Featured Temple Poojas
               </h2>
             </div>
-            <Link href="/events">
-              <Button variant="secondary" size="sm" icon={ChevronRight}>
-                View All Festivals
+            <Link href="/poojas">
+              <Button variant="primary" size="sm" icon={ChevronRight}>
+                View All Poojas
               </Button>
             </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {events.slice(0, 3).map((event) => (
-              <Card key={event.id} className="space-y-4">
-                <div className="relative h-48 w-full rounded-xl overflow-hidden border border-[#2A3A33]">
-                  <Image
-                    src={event.image || "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=800&auto=format&fit=crop"}
-                    alt={event.title}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute top-3 left-3 px-3 py-1 rounded-lg bg-[#0F1B16]/90 text-xs font-semibold text-[#C6A15B] border border-[#2A3A33]">
-                    {event.category}
+            {poojas.slice(0, 3).map((pooja) => (
+              <Card key={pooja.id} className="space-y-4 flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-[#9B7A41]">
+                      {pooja.category || 'Serpent Pooja'}
+                    </span>
+                    <span className="text-lg font-heading font-bold text-[#F7F2E7]">
+                      ₹{pooja.price}
+                    </span>
                   </div>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="text-xs text-[#8FA98B] flex items-center gap-2">
-                    <Calendar className="w-3.5 h-3.5 text-[#C6A15B]" />
-                    <span>{event.date} • {event.time}</span>
-                  </div>
-                  <h3 className="font-heading text-xl text-[#F3EFE3]">
-                    {event.title}
+                  <h3 className="font-heading text-xl text-[#F7F2E7]">
+                    {pooja.name}
                   </h3>
-                  <p className="text-sm text-[#C4C0B4] line-clamp-3 leading-relaxed">
-                    {event.description}
+                  <p className="text-sm text-[#D8D5C8] leading-relaxed line-clamp-3">
+                    {pooja.description}
                   </p>
+                </div>
+                <div className="pt-4 border-t border-[#5E645A]/50 flex items-center justify-between">
+                  <span className="text-xs text-[#4F7A4D]">{pooja.timing || 'Daily Morning'}</span>
+                  <Button variant="secondary" size="sm" onClick={() => openBookingForPooja(pooja)}>
+                    Book Offering
+                  </Button>
                 </div>
               </Card>
             ))}
@@ -365,60 +368,15 @@ export default function HomePage() {
       </section>
 
       {/* ----------------------------------------------------
-          SECTION 7: GALLERY PREVIEW
+          SECTION 6: VISITOR INFORMATION
       ---------------------------------------------------- */}
-      <section className="py-20 px-5 sm:px-8 lg:px-12 bg-[#0F1B16]">
-        <div className="max-w-6xl mx-auto space-y-12">
-          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#C6A15B] block mb-2">
-                Visual Sanctuary
-              </span>
-              <h2 className="font-heading text-3xl sm:text-4xl text-[#F3EFE3]">
-                Gallery & Sacred Media
-              </h2>
-            </div>
-            <Link href="/gallery">
-              <Button variant="ghost" size="sm" icon={ChevronRight}>
-                View Full Gallery
-              </Button>
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {gallery.slice(0, 4).map((item) => (
-              <div key={item.id} className="relative h-56 rounded-2xl overflow-hidden border border-[#2A3A33] group">
-                <Image
-                  src={item.url}
-                  alt={item.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F1B16] via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-                <div className="absolute bottom-3 left-3 right-3">
-                  <span className="text-[10px] font-semibold uppercase tracking-wider text-[#C6A15B] block">
-                    {item.category}
-                  </span>
-                  <h4 className="font-heading text-sm text-[#F3EFE3] truncate">
-                    {item.title}
-                  </h4>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ----------------------------------------------------
-          SECTION 8: VISITOR INFORMATION
-      ---------------------------------------------------- */}
-      <section className="py-20 px-5 sm:px-8 lg:px-12 bg-[#18261F] border-y border-[#2A3A33]">
+      <section className="py-20 px-5 sm:px-8 lg:px-12 bg-[#0D1A12]">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center space-y-4 max-w-2xl mx-auto">
-            <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#C6A15B]">
+            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9B7A41]">
               Devotee Guide
             </span>
-            <h2 className="font-heading text-3xl sm:text-4xl text-[#F3EFE3]">
+            <h2 className="font-heading text-3xl sm:text-4xl text-[#F7F2E7]">
               Visitor Information & Rules
             </h2>
           </div>
@@ -426,33 +384,33 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Dress Code Card */}
             <Card className="space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-[#0F1B16] border border-[#2A3A33] flex items-center justify-center text-[#C6A15B]">
+              <div className="w-10 h-10 rounded-xl bg-[#0D1A12] border border-[#5E645A] flex items-center justify-center text-[#9B7A41]">
                 <ShieldCheck className="w-5 h-5" />
               </div>
-              <h3 className="font-heading text-xl text-[#F3EFE3]">Dress Code</h3>
-              <p className="text-sm text-[#C4C0B4] leading-relaxed">
+              <h3 className="font-heading text-xl text-[#F7F2E7]">Dress Code</h3>
+              <p className="text-sm text-[#D8D5C8] leading-relaxed">
                 {settings.dressCode || 'Traditional Dhoti/Mundu for Gents (Upper cloth allowed outside inner sanctum). Sarees, Set Mundu, or Salwar for Ladies.'}
               </p>
             </Card>
 
-            {/* Parking & Rules Card */}
+            {/* Parking & Conduct */}
             <Card className="space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-[#0F1B16] border border-[#2A3A33] flex items-center justify-center text-[#C6A15B]">
+              <div className="w-10 h-10 rounded-xl bg-[#0D1A12] border border-[#5E645A] flex items-center justify-center text-[#9B7A41]">
                 <MapPin className="w-5 h-5" />
               </div>
-              <h3 className="font-heading text-xl text-[#F3EFE3]">Parking & Conduct</h3>
-              <p className="text-sm text-[#C4C0B4] leading-relaxed">
+              <h3 className="font-heading text-xl text-[#F7F2E7]">Parking & Conduct</h3>
+              <p className="text-sm text-[#D8D5C8] leading-relaxed">
                 {settings.parking || 'Ample vehicle parking available. Footwear must be removed at outer counter. Maintain quiet solitude near Sarpa Kavu.'}
               </p>
             </Card>
 
-            {/* Photography Policy Card */}
+            {/* Photography Policy */}
             <Card className="space-y-4">
-              <div className="w-10 h-10 rounded-xl bg-[#0F1B16] border border-[#2A3A33] flex items-center justify-center text-[#C6A15B]">
+              <div className="w-10 h-10 rounded-xl bg-[#0D1A12] border border-[#5E645A] flex items-center justify-center text-[#9B7A41]">
                 <Flower2 className="w-5 h-5" />
               </div>
-              <h3 className="font-heading text-xl text-[#F3EFE3]">Photography Policy</h3>
-              <p className="text-sm text-[#C4C0B4] leading-relaxed">
+              <h3 className="font-heading text-xl text-[#F7F2E7]">Photography Policy</h3>
+              <p className="text-sm text-[#D8D5C8] leading-relaxed">
                 {settings.photographyPolicy || 'Strictly forbidden inside inner sanctum and Sarpa Kavu. Allowed only in outer temple compound.'}
               </p>
             </Card>
@@ -461,24 +419,21 @@ export default function HomePage() {
       </section>
 
       {/* ----------------------------------------------------
-          SECTION 9: DONATION CTA
+          SECTION 7: DONATION CTA (Simplified, No Heart Graphics)
       ---------------------------------------------------- */}
-      <section className="py-20 px-5 sm:px-8 lg:px-12 bg-[#0F1B16]">
+      <section className="py-20 px-5 sm:px-8 lg:px-12 bg-[#233728]/30 border-t border-[#5E645A]/50">
         <div className="max-w-4xl mx-auto">
-          <Card className="p-8 sm:p-12 text-center space-y-6 bg-gradient-to-b from-[#18261F] to-[#0F1B16] border-[#C6A15B]/30 shadow-gold">
-            <div className="w-12 h-12 rounded-full bg-[#0F1B16] border border-[#C6A15B] flex items-center justify-center text-[#C6A15B] mx-auto">
-              <Heart className="w-6 h-6" />
-            </div>
-            <h2 className="font-heading text-3xl sm:text-4xl text-[#F3EFE3]">
+          <Card className="p-8 sm:p-12 text-center space-y-6 bg-[#233728] border-[#5E645A]">
+            <h2 className="font-heading text-3xl sm:text-4xl text-[#F7F2E7]">
               Support Temple Upkeep & Sarpa Kavu Conservation
             </h2>
-            <p className="text-base text-[#C4C0B4] max-w-xl mx-auto leading-relaxed">
-              Your valuable offerings sustain daily Annadanam, ancient Sarpa Kavu flora preservation, and traditional Tantric rituals.
+            <p className="text-base text-[#D8D5C8] max-w-xl mx-auto leading-relaxed">
+              Your contributions sustain daily Annadanam, ancient Sarpa Kavu flora preservation, and traditional Tantric rituals.
             </p>
             <div className="pt-2">
               <Link href="/donations">
-                <Button variant="primary" size="lg" icon={Heart}>
-                  Donate Online Now
+                <Button variant="primary" size="lg">
+                  Contribute Online Now
                 </Button>
               </Link>
             </div>
