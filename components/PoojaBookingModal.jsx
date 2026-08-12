@@ -60,21 +60,21 @@ export default function PoojaBookingModal({ isOpen, onClose, selectedPooja }) {
           
           {/* Selected Pooja Summary Card */}
           {selectedPooja && (
-            <div className="bg-[#0F1B16] border border-[#2A3A33] rounded-xl p-4 flex items-center justify-between">
+            <div className="bg-[#0D1A12] border border-[#5E645A] rounded-xl p-4 flex items-center justify-between">
               <div>
-                <span className="text-xs text-[#8FA98B] font-medium block">Selected Offering</span>
-                <h4 className="font-heading text-lg text-[#F3EFE3]">{selectedPooja.name}</h4>
-                <p className="text-xs text-[#6D7B71]">{selectedPooja.timing}</p>
+                <span className="text-xs text-[#4F7A4D] font-medium block">Selected Offering</span>
+                <h4 className="font-heading text-lg text-[#F7F2E7]">{selectedPooja.name}</h4>
+                <p className="text-xs text-[#D8D5C8]">{selectedPooja.timing}</p>
               </div>
               <div className="text-right">
-                <span className="font-heading text-xl text-[#C6A15B]">₹{selectedPooja.price}</span>
+                <span className="font-heading text-xl text-[#9B7A41]">₹{selectedPooja.price}</span>
               </div>
             </div>
           )}
 
           {/* Devotee Name */}
           <div className="space-y-2">
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#C4C0B4]">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-[#D8D5C8]">
               Devotee Full Name *
             </label>
             <input
@@ -83,22 +83,22 @@ export default function PoojaBookingModal({ isOpen, onClose, selectedPooja }) {
               value={devoteeName}
               onChange={(e) => setDevoteeName(e.target.value)}
               placeholder="e.g. Ananthakrishnan Nair"
-              className="w-full bg-[#0F1B16] border border-[#2A3A33] rounded-xl px-4 py-3 text-[#F3EFE3] placeholder-[#6D7B71] focus:outline-none focus:border-[#C6A15B] transition-colors"
+              className="w-full bg-[#0D1A12] border border-[#5E645A] rounded-xl px-4 py-3 text-[#F7F2E7] placeholder-[#5E645A] focus:outline-none focus:border-[#9B7A41] transition-colors"
             />
           </div>
 
           {/* Nakshatra / Star */}
           <div className="space-y-2">
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#C4C0B4]">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-[#D8D5C8]">
               Birth Star (Nakshatra) *
             </label>
             <select
               value={star}
               onChange={(e) => setStar(e.target.value)}
-              className="w-full bg-[#0F1B16] border border-[#2A3A33] rounded-xl px-4 py-3 text-[#F3EFE3] focus:outline-none focus:border-[#C6A15B] transition-colors cursor-pointer"
+              className="w-full bg-[#0D1A12] border border-[#5E645A] rounded-xl px-4 py-3 text-[#F7F2E7] focus:outline-none focus:border-[#9B7A41] transition-colors cursor-pointer"
             >
               {NAKSHATRAS.map((s) => (
-                <option key={s} value={s} className="bg-[#0F1B16] text-[#F3EFE3]">
+                <option key={s} value={s} className="bg-[#0D1A12] text-[#F7F2E7]">
                   {s}
                 </option>
               ))}
@@ -107,7 +107,7 @@ export default function PoojaBookingModal({ isOpen, onClose, selectedPooja }) {
 
           {/* Date Picker */}
           <div className="space-y-2">
-            <label className="block text-xs font-semibold uppercase tracking-wider text-[#C4C0B4]">
+            <label className="block text-xs font-semibold uppercase tracking-wider text-[#D8D5C8]">
               Preferred Pooja Date *
             </label>
             <input
@@ -116,13 +116,13 @@ export default function PoojaBookingModal({ isOpen, onClose, selectedPooja }) {
               min={new Date().toISOString().split('T')[0]}
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full bg-[#0F1B16] border border-[#2A3A33] rounded-xl px-4 py-3 text-[#F3EFE3] focus:outline-none focus:border-[#C6A15B] transition-colors"
+              className="w-full bg-[#0D1A12] border border-[#5E645A] rounded-xl px-4 py-3 text-[#F7F2E7] focus:outline-none focus:border-[#9B7A41] transition-colors"
             />
           </div>
 
           {/* Payment Gateway Note */}
-          <div className="p-3 bg-[#23452F]/40 border border-[#2A3A33] rounded-xl flex items-center gap-3 text-xs text-[#8FA98B]">
-            <CreditCard className="w-5 h-5 text-[#C6A15B] shrink-0" />
+          <div className="p-3 bg-[#0D1A12] border border-[#5E645A] rounded-xl flex items-center gap-3 text-xs text-[#4F7A4D]">
+            <CreditCard className="w-5 h-5 text-[#9B7A41] shrink-0" />
             <span>Secure Online Gateway integration (UPI, Netbanking, Cards). Instant receipt generated upon payment.</span>
           </div>
 

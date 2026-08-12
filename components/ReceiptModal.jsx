@@ -2,103 +2,123 @@
 import React from 'react';
 import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
-import { Printer, Download, CheckCircle, Sparkles } from 'lucide-react';
+import { Printer, CheckCircle } from 'lucide-react';
 
 export default function ReceiptModal({ isOpen, onClose, receiptData }) {
   if (!receiptData) return null;
 
   const handlePrint = () => {
+    // Trigger print — globals.css @media print styles handle white bg + single page
     window.print();
   };
 
+  const date = receiptData.date
+    ? receiptData.date
+    : receiptData.createdAt
+    ? new Date(receiptData.createdAt).toLocaleDateString('en-IN', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+      })
+    : new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' });
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Official Temple Receipt" maxWidth="max-w-xl">
-      <div className="space-y-6" id="printable-receipt">
-        {/* Success Header */}
-        <div className="text-center pb-6 border-b border-[#2A3A33]">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#4F8A5B]/20 text-[#4F8A5B] mb-3">
-            <CheckCircle className="w-6 h-6" />
+    <Modal isOpen={isOpen} onClose={onClose} title="Official Temple Receipt" maxWidth="max-w-lg">
+      {/* Action Buttons — hidden on print via .no-print class */}
+      <div className="no-print flex items-center gap-3 mb-5">
+        <Button variant="primary" size="md" className="flex-1" onClick={handlePrint} icon={Printer}>
+          Print / Save as PDF
+        </Button>
+        <Button variant="secondary" size="md" onClick={onClose}>
+          Close
+        </Button>
+      </div>
+
+      {/* ===== PRINTABLE RECEIPT AREA ===== */}
+      {/* This div is targeted by @media print in globals.css */}
+      <div id="printable-receipt">
+        {/* Success marker — screen only */}
+        <div className="no-print text-center pb-4 border-b border-[#5E645A]/50 mb-4">
+          <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#233728] text-[#4F7A4D] mb-2">
+            <CheckCircle className="w-5 h-5" />
           </div>
-          <h3 className="font-heading text-xl text-[#F3EFE3]">
-            Receipt Confirmed
-          </h3>
-          <p className="text-xs text-[#8FA98B] mt-1">
-            May Shree Nagaraja & Nagayakshi bless you with divine grace and health.
+          <p className="text-xs text-[#4F7A4D]">Receipt Confirmed. May Shree Nagaraja bless you.</p>
+        </div>
+
+        {/* ---- RECEIPT CONTENT (renders white on print) ---- */}
+        <div className="receipt-content space-y-0">
+
+          {/* Temple Header */}
+          <div className="receipt-header text-center pb-4 mb-4" style={{ borderBottom: '2px solid #9B7A41' }}>
+            <h2 className="receipt-temple-name" style={{ fontFamily: 'serif', fontSize: '18px', fontWeight: 'bold', margin: '0 0 4px 0' }}>
+              Mevakkatu Shree Nagaraja Kshetram
+            </h2>
+            <p style={{ fontSize: '12px', margin: '0', color: '#555' }}>
+              Sacred Serpent Temple Trust • Kerala, India
+            </p>
+            <p style={{ fontSize: '11px', margin: '4px 0 0 0', color: '#777' }}>
+              Official Digital Receipt — {receiptData.receiptId}
+            </p>
+          </div>
+
+          {/* Receipt Row Helper */}
+          {[
+            { label: 'Devotee Name', value: receiptData.devoteeName || receiptData.donorName },
+            receiptData.star && { label: 'Birth Star (Nakshatra)', value: receiptData.star },
+            receiptData.poojaName && { label: 'Offering / Pooja', value: receiptData.poojaName },
+            receiptData.purpose && { label: 'Donation Purpose', value: receiptData.purpose },
+            { label: 'Date of Offering', value: date },
+            { label: 'Transaction ID', value: receiptData.paymentId || receiptData.receiptId || 'TXN-ONLINE-SUCCESS' },
+          ]
+            .filter(Boolean)
+            .map(({ label, value }, idx) => (
+              <div
+                key={idx}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  padding: '8px 0',
+                  borderBottom: '1px solid #e0e0e0',
+                  fontSize: '13px',
+                }}
+              >
+                <span style={{ color: '#555', fontWeight: '500' }}>{label}:</span>
+                <span style={{ color: '#111', fontWeight: '600', textAlign: 'right', maxWidth: '55%' }}>{value}</span>
+              </div>
+            ))}
+
+          {/* Total Amount */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '12px 16px',
+              marginTop: '12px',
+              background: '#f5f0e8',
+              borderRadius: '8px',
+              border: '1px solid #9B7A41',
+            }}
+          >
+            <span style={{ fontSize: '15px', fontWeight: '600', color: '#333' }}>Total Amount Paid:</span>
+            <span style={{ fontSize: '20px', fontWeight: '800', color: '#9B7A41' }}>₹{receiptData.amount}</span>
+          </div>
+
+          {/* Footer Note */}
+          <p
+            style={{
+              fontSize: '10px',
+              color: '#888',
+              textAlign: 'center',
+              marginTop: '16px',
+              fontStyle: 'italic',
+              lineHeight: '1.5',
+            }}
+          >
+            This digital receipt is automatically generated by Mevakkatu Shree Nagaraja Kshetram Trust.
+            <br />
+            Present at the temple counter if collecting prasadam in person.
           </p>
-        </div>
-
-        {/* Temple Branding Header */}
-        <div className="bg-[#0F1B16] border border-[#2A3A33] rounded-xl p-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Sparkles className="w-5 h-5 text-[#C6A15B]" />
-            <div>
-              <h4 className="font-heading text-sm text-[#F3EFE3]">Mevakkatu Shree Nagaraja Kshetram</h4>
-              <p className="text-[11px] text-[#6D7B71]">Kerala • Official Digital Receipt</p>
-            </div>
-          </div>
-          <div className="text-right">
-            <span className="text-xs text-[#6D7B71] block">Receipt No</span>
-            <span className="text-xs font-mono font-bold text-[#C6A15B]">{receiptData.receiptId}</span>
-          </div>
-        </div>
-
-        {/* Receipt Details Grid */}
-        <div className="space-y-3 text-sm">
-          <div className="flex justify-between py-2 border-b border-[#2A3A33]/50">
-            <span className="text-[#6D7B71]">Devotee Name:</span>
-            <span className="text-[#F3EFE3] font-semibold">{receiptData.devoteeName || receiptData.donorName}</span>
-          </div>
-
-          {receiptData.star && (
-            <div className="flex justify-between py-2 border-b border-[#2A3A33]/50">
-              <span className="text-[#6D7B71]">Birth Star (Nakshatra):</span>
-              <span className="text-[#C6A15B] font-semibold">{receiptData.star}</span>
-            </div>
-          )}
-
-          {receiptData.poojaName && (
-            <div className="flex justify-between py-2 border-b border-[#2A3A33]/50">
-              <span className="text-[#6D7B71]">Offering / Pooja:</span>
-              <span className="text-[#F3EFE3] font-semibold">{receiptData.poojaName}</span>
-            </div>
-          )}
-
-          {receiptData.purpose && (
-            <div className="flex justify-between py-2 border-b border-[#2A3A33]/50">
-              <span className="text-[#6D7B71]">Donation Purpose:</span>
-              <span className="text-[#F3EFE3] font-semibold">{receiptData.purpose}</span>
-            </div>
-          )}
-
-          <div className="flex justify-between py-2 border-b border-[#2A3A33]/50">
-            <span className="text-[#6D7B71]">Date of Offering:</span>
-            <span className="text-[#F3EFE3]">{receiptData.date || new Date(receiptData.createdAt).toLocaleDateString()}</span>
-          </div>
-
-          <div className="flex justify-between py-2 border-b border-[#2A3A33]/50">
-            <span className="text-[#6D7B71]">Transaction ID:</span>
-            <span className="text-[#8FA98B] font-mono text-xs">{receiptData.paymentId || 'TXN-ONLINE-SUCCESS'}</span>
-          </div>
-
-          <div className="flex justify-between items-center py-3 bg-[#0F1B16] rounded-xl px-4 mt-4">
-            <span className="text-base font-medium text-[#F3EFE3]">Total Amount Paid:</span>
-            <span className="text-xl font-heading font-bold text-[#C6A15B]">₹{receiptData.amount}</span>
-          </div>
-        </div>
-
-        {/* Receipt Footer note */}
-        <p className="text-[11px] text-[#6D7B71] text-center italic">
-          This digital receipt is generated automatically by Mevakkatu Shree Nagaraja Kshetram Trust system. Present this receipt at the temple counter if collecting prasadam in person.
-        </p>
-
-        {/* Action Buttons */}
-        <div className="flex items-center gap-3 pt-2">
-          <Button variant="primary" size="md" className="flex-1" onClick={handlePrint} icon={Printer}>
-            Print / Save PDF
-          </Button>
-          <Button variant="secondary" size="md" onClick={onClose}>
-            Close
-          </Button>
         </div>
       </div>
     </Modal>

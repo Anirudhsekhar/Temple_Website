@@ -11,13 +11,13 @@ export default function GlobalError({ error, reset }) {
 
   return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center px-5 text-center space-y-6">
-      <div className="w-16 h-16 rounded-full bg-[#18261F] border border-red-900/50 flex items-center justify-center text-[#D88A2D]">
+      <div className="w-16 h-16 rounded-full bg-[#233728] border border-red-900/50 flex items-center justify-center text-[#9B7A41]">
         <AlertTriangle className="w-8 h-8" />
       </div>
-      <h1 className="font-heading text-4xl sm:text-5xl text-[#F3EFE3]">
+      <h1 className="font-heading text-4xl sm:text-5xl text-[#F7F2E7]">
         Temporary System Disturbance
       </h1>
-      <p className="text-base text-[#C4C0B4] max-w-md mx-auto leading-relaxed">
+      <p className="text-base text-[#D8D5C8] max-w-md mx-auto leading-relaxed">
         An unexpected error occurred while loading this section. Please refresh or try again shortly.
       </p>
       <div className="pt-2 flex items-center justify-center gap-4">

@@ -10,7 +10,7 @@ import NagaLogo from '@/components/NagaLogo';
 const NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
-  { href: '/events', label: 'Festivals' },
+  { href: '/festivals', label: 'Festivals' },
   { href: '/poojas', label: 'Poojas' },
   { href: '/donations', label: 'Donations' },
   { href: '/contact', label: 'Contact' },

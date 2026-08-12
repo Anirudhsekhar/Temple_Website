@@ -257,7 +257,7 @@ export default function HomePage() {
             Join the sacred chants, Pulluvan Pattu, and traditional Noorum Palum offerings performed during upcoming festival dates.
           </p>
           <div className="pt-2">
-            <Link href="/events">
+            <Link href="/festivals">
               <Button variant="primary" size="lg" icon={Calendar}>
                 View All Festivals
               </Button>

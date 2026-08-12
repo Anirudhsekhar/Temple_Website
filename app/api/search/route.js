@@ -43,7 +43,7 @@ export async function GET(request) {
         title: item.title,
         subtitle: `${item.date} (${item.category})`,
         description: item.description,
-        link: '/events'
+        link: '/festivals'
       });
     }
   });
