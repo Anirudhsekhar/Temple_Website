@@ -1,12 +1,12 @@
 {
   "settings": {
     "templeName": "Mevakkatu Shree Nagaraja Kshetram",
-    "tagline": "In the Shade of Elanji, Divinity Breathes",
+    "tagline": "Concreting Devotion in the Sacred Shade of Sarpakavu",
     "openingHours": "Morning: 05:00 AM - 11:30 AM | Evening: 05:00 PM - 07:30 PM",
     "heroTitle": "Mevakkatu Shree Nagaraja Kshetram",
     "heroSubtitle": "Experience the calm, sacred presence of serpent divinity amidst ancient Sarpa Kavu flora.",
     "contactEmail": "info@mevakkatusheenagaraja.org",
-    "contactPhone": "+91 471 234 5678",
+    "contactPhone": "+91 471 234 5679",
     "emergencyPhone": "+91 984 701 2345",
     "address": "Mevakkatu, Near Sacred Serpent Grove, Kerala 695001, India",
     "dressCode": "Dhoti/Mundu for Gents (Shirts to be removed before entering the inner sanctum). Traditional Saree, Set Mundu, or Salwar for Ladies.",
@@ -127,7 +127,9 @@
       "name": "Special Noorum Palum",
       "description": "Traditional sacred mix of milk, turmeric powder, tender coconut water, and rice flour offered at the idol of Nagaraja in Sarpa Kavu.",
       "price": 350,
-      "starsApplicable": ["All Birth Stars"],
+      "starsApplicable": [
+        "All Birth Stars"
+      ],
       "timing": "Daily Morning 08:30 AM",
       "category": "Serpent Pooja"
     },
@@ -136,7 +138,13 @@
       "name": "Maha Sarpa Bali Ritual",
       "description": "Elaborate multi-priest ritual with intricate powder mandala (Kalamezhuthu) designed for removing Nagadosham and health obstacles.",
       "price": 1500,
-      "starsApplicable": ["Ayilyam", "Makam", "Ketta", "Revathi", "All Stars"],
+      "starsApplicable": [
+        "Ayilyam",
+        "Makam",
+        "Ketta",
+        "Revathi",
+        "All Stars"
+      ],
       "timing": "Evening 06:00 PM on Special Days",
       "category": "Grand Ritual"
     },
@@ -145,7 +153,9 @@
       "name": "Rahu-Ketu Peeda Shanti Archana",
       "description": "Special floral pushpanjali with holy chantings focused on relieving astrological affliction of planetary nodes.",
       "price": 200,
-      "starsApplicable": ["All Birth Stars"],
+      "starsApplicable": [
+        "All Birth Stars"
+      ],
       "timing": "Daily Morning / Evening",
       "category": "Archana"
     },
@@ -154,7 +164,9 @@
       "name": "Nagachamayam & Manjal Abhishekam",
       "description": "Adorning Nagadevatas with pure sandalwood paste, floral garlands, and turmeric bath.",
       "price": 600,
-      "starsApplicable": ["All Birth Stars"],
+      "starsApplicable": [
+        "All Birth Stars"
+      ],
       "timing": "Daily Morning 06:30 AM",
       "category": "Abhishekam"
     },
@@ -163,7 +175,9 @@
       "name": "Palpayasam Offering",
       "description": "Rich milk and rice dessert prepared in temple kitchen with pure cow milk and ghee as divine offering.",
       "price": 150,
-      "starsApplicable": ["All Birth Stars"],
+      "starsApplicable": [
+        "All Birth Stars"
+      ],
       "timing": "Daily Noon 10:30 AM",
       "category": "Nivedyam"
     },
@@ -172,12 +186,33 @@
       "name": "Kadali Pazham Nivedyam & Archana",
       "description": "Offering of plantain fruits and red flowers to appease Nagaraja.",
       "price": 100,
-      "starsApplicable": ["All Birth Stars"],
+      "starsApplicable": [
+        "All Birth Stars"
+      ],
       "timing": "Daily Morning / Evening",
       "category": "Nivedyam"
+    },
+    {
+      "name": "New Seva Offering",
+      "description": "Description of offering...",
+      "price": 250,
+      "timing": "Daily Morning",
+      "category": "Serpent Pooja",
+      "starsApplicable": [
+        "All Stars"
+      ],
+      "id": "p-1786526996590"
     }
   ],
   "gallery": [
+    {
+      "title": "New Temple Media",
+      "category": "Sarpa Kavu",
+      "url": "https://images.unsplash.com/photo-1545652985-5edd365b12eb?q=80&w=800&auto=format&fit=crop",
+      "type": "image",
+      "album": "Sacred Grove",
+      "id": "g-1786527011466"
+    },
     {
       "id": "g-1",
       "title": "Sacred Serpent Grove (Sarpa Kavu)",

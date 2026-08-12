@@ -282,7 +282,7 @@ export default function AdminPage() {
 
   return (
     <div className="py-10 px-5 sm:px-8 lg:px-12 max-w-7xl mx-auto space-y-8">
-      
+
       {/* Top Admin Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[#5E645A]/50">
         <div>
@@ -318,7 +318,7 @@ export default function AdminPage() {
 
       {/* Main CMS Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
+
         {/* Sidebar Nav */}
         <div className="lg:col-span-3 space-y-1">
           {navTabs.map((t) => {
@@ -328,11 +328,10 @@ export default function AdminPage() {
               <button
                 key={t.id}
                 onClick={() => setActiveTab(t.id)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors text-left ${
-                  isActive
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors text-left ${isActive
                     ? 'bg-[#9B7A41] text-[#0D1A12] font-bold'
                     : 'bg-[#233728]/50 text-[#D8D5C8] border border-[#5E645A]/50 hover:border-[#9B7A41] hover:text-[#F7F2E7]'
-                }`}
+                  }`}
               >
                 <Icon className="w-4 h-4 shrink-0" />
                 <span>{t.label}</span>
@@ -343,7 +342,7 @@ export default function AdminPage() {
 
         {/* CMS Workspace Content */}
         <div className="lg:col-span-9">
-          
+
           {loadingData && (
             <div className="flex items-center justify-center py-20 text-[#4F7A4D]">
               <Loader2 className="w-6 h-6 animate-spin mr-3" />
