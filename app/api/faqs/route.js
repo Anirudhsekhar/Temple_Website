@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getSection, updateSection } from '@/lib/dataStore';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const faqs = getSection('faqs') || [];
   return NextResponse.json({ success: true, faqs });

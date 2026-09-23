@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
+import ItemModal from '@/components/admin/ItemModal';
 
 export default function AdminPage() {
   // Auth state — email/password only (Google SSO removed per Changes.md)
@@ -55,6 +56,37 @@ export default function AdminPage() {
   // Timings editing state
   const [editingTimings, setEditingTimings] = useState([]);
   const [timingsSaving, setTimingsSaving] = useState(false);
+
+  // Generic Modal State
+  const [modalConfig, setModalConfig] = useState({ isOpen: false, item: null, type: '', endpoint: '', sectionKey: '', fields: [], title: '' });
+
+  const openModal = (type, item, endpoint, sectionKey, fields, title) => {
+    setModalConfig({ isOpen: true, item, type, endpoint, sectionKey, fields, title });
+  };
+  const closeModal = () => setModalConfig(prev => ({ ...prev, isOpen: false }));
+
+  const handleSaveModal = async (formData) => {
+    const isEdit = !!formData.id;
+    const method = isEdit ? 'PUT' : 'POST';
+    try {
+      const res = await fetch(modalConfig.endpoint, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      const result = await res.json();
+      if (result.success) {
+        notifySave(`Item ${isEdit ? 'updated' : 'added'} in ${modalConfig.sectionKey}.`);
+        loadAdminData();
+        closeModal();
+      } else {
+        alert(result.error || 'Failed to save item');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Network error saving item');
+    }
+  };
 
   // Handle Login — email/password only
   const handleLogin = async (e) => {
@@ -593,14 +625,14 @@ export default function AdminPage() {
                 <Button
                   variant="primary"
                   size="sm"
-                  onClick={() => handleAddItem('/api/events', {
-                    title: 'New Festival',
-                    date: '2026-11-01',
-                    time: '06:00 AM',
-                    location: 'Main Mandapam',
-                    description: 'Festival details...',
-                    category: 'Festival'
-                  }, 'Events')}
+                  onClick={() => openModal('events', null, '/api/events', 'Events', [
+                    { name: 'title', label: 'Event Title', type: 'text', required: true },
+                    { name: 'date', label: 'Date', type: 'date', required: true },
+                    { name: 'time', label: 'Time', type: 'text', required: true },
+                    { name: 'location', label: 'Location', type: 'text', required: true },
+                    { name: 'category', label: 'Category', type: 'select', options: [{label:'Festival', value:'Festival'}, {label:'Event', value:'Event'}], required: true },
+                    { name: 'description', label: 'Description', type: 'textarea' }
+                  ], 'Add Event/Festival')}
                   icon={Plus}
                 >
                   Add Festival
@@ -618,13 +650,29 @@ export default function AdminPage() {
                       <p className="text-xs text-[#4F7A4D]">{ev.date} • {ev.time} • {ev.category}</p>
                       <p className="text-xs text-[#D8D5C8] mt-1 line-clamp-2">{ev.description}</p>
                     </div>
-                    <button
-                      onClick={() => handleDeleteItem('/api/events', ev.id, 'Events')}
-                      className="p-2 text-red-400 hover:bg-red-950/40 rounded-lg shrink-0"
-                      aria-label="Delete event"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => openModal('events', ev, '/api/events', 'Events', [
+                          { name: 'title', label: 'Event Title', type: 'text', required: true },
+                          { name: 'date', label: 'Date', type: 'date', required: true },
+                          { name: 'time', label: 'Time', type: 'text', required: true },
+                          { name: 'location', label: 'Location', type: 'text', required: true },
+                          { name: 'category', label: 'Category', type: 'select', options: [{label:'Festival', value:'Festival'}, {label:'Event', value:'Event'}], required: true },
+                          { name: 'description', label: 'Description', type: 'textarea' }
+                        ], 'Edit Event/Festival')}
+                        className="p-2 text-[#9B7A41] hover:bg-[#9B7A41]/10 rounded-lg shrink-0"
+                        aria-label="Edit event"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteItem('/api/events', ev.id, 'Events')}
+                        className="p-2 text-red-400 hover:bg-red-950/40 rounded-lg shrink-0"
+                        aria-label="Delete event"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -639,14 +687,13 @@ export default function AdminPage() {
                 <Button
                   variant="primary"
                   size="sm"
-                  onClick={() => handleAddItem('/api/poojas', {
-                    name: 'New Seva Offering',
-                    description: 'Description of offering...',
-                    price: 250,
-                    timing: 'Daily Morning',
-                    category: 'Serpent Pooja',
-                    starsApplicable: ['All Stars']
-                  }, 'Poojas')}
+                  onClick={() => openModal('poojas', null, '/api/poojas', 'Poojas', [
+                    { name: 'name', label: 'Pooja Name', type: 'text', required: true },
+                    { name: 'price', label: 'Price (₹)', type: 'number', required: true },
+                    { name: 'timing', label: 'Timing', type: 'text', required: true },
+                    { name: 'category', label: 'Category', type: 'text', required: true },
+                    { name: 'description', label: 'Description', type: 'textarea' }
+                  ], 'Add Pooja')}
                   icon={Plus}
                 >
                   Add Pooja
@@ -664,13 +711,28 @@ export default function AdminPage() {
                       <p className="text-xs text-[#4F7A4D]">{p.timing} • Category: {p.category}</p>
                       <p className="text-xs text-[#D8D5C8] mt-1 line-clamp-2">{p.description}</p>
                     </div>
-                    <button
-                      onClick={() => handleDeleteItem('/api/poojas', p.id, 'Poojas')}
-                      className="p-2 text-red-400 hover:bg-red-950/40 rounded-lg shrink-0"
-                      aria-label="Delete pooja"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => openModal('poojas', p, '/api/poojas', 'Poojas', [
+                          { name: 'name', label: 'Pooja Name', type: 'text', required: true },
+                          { name: 'price', label: 'Price (₹)', type: 'number', required: true },
+                          { name: 'timing', label: 'Timing', type: 'text', required: true },
+                          { name: 'category', label: 'Category', type: 'text', required: true },
+                          { name: 'description', label: 'Description', type: 'textarea' }
+                        ], 'Edit Pooja')}
+                        className="p-2 text-[#9B7A41] hover:bg-[#9B7A41]/10 rounded-lg shrink-0"
+                        aria-label="Edit pooja"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteItem('/api/poojas', p.id, 'Poojas')}
+                        className="p-2 text-red-400 hover:bg-red-950/40 rounded-lg shrink-0"
+                        aria-label="Delete pooja"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -685,13 +747,12 @@ export default function AdminPage() {
                 <Button
                   variant="primary"
                   size="sm"
-                  onClick={() => handleAddItem('/api/gallery', {
-                    title: 'New Temple Media',
-                    category: 'Sarpa Kavu',
-                    url: 'https://images.unsplash.com/photo-1545652985-5edd365b12eb?q=80&w=800&auto=format&fit=crop',
-                    type: 'image',
-                    album: 'Sacred Grove'
-                  }, 'Gallery')}
+                  onClick={() => openModal('gallery', null, '/api/gallery', 'Gallery', [
+                    { name: 'title', label: 'Media Title', type: 'text', required: true },
+                    { name: 'category', label: 'Category', type: 'text', required: true },
+                    { name: 'album', label: 'Album', type: 'text', required: true },
+                    { name: 'url', label: 'Upload Image', type: 'file', required: true }
+                  ], 'Upload Media')}
                   icon={Plus}
                 >
                   Upload Media
@@ -713,13 +774,27 @@ export default function AdminPage() {
                         <span className="text-[10px] text-[#4F7A4D]">{g.category} • {g.album}</span>
                       </div>
                     </div>
-                    <button
-                      onClick={() => handleDeleteItem('/api/gallery', g.id, 'Gallery')}
-                      className="p-2 text-red-400 hover:bg-red-950/40 rounded-lg shrink-0"
-                      aria-label="Delete gallery item"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => openModal('gallery', g, '/api/gallery', 'Gallery', [
+                          { name: 'title', label: 'Media Title', type: 'text', required: true },
+                          { name: 'category', label: 'Category', type: 'text', required: true },
+                          { name: 'album', label: 'Album', type: 'text', required: true },
+                          { name: 'url', label: 'Upload Image', type: 'file', required: true }
+                        ], 'Edit Media')}
+                        className="p-2 text-[#9B7A41] hover:bg-[#9B7A41]/10 rounded-lg shrink-0"
+                        aria-label="Edit media"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteItem('/api/gallery', g.id, 'Gallery')}
+                        className="p-2 text-red-400 hover:bg-red-950/40 rounded-lg shrink-0"
+                        aria-label="Delete gallery item"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -781,11 +856,11 @@ export default function AdminPage() {
                 <Button
                   variant="primary"
                   size="sm"
-                  onClick={() => handleAddItem('/api/faqs', {
-                    question: 'New FAQ Question?',
-                    answer: 'Answer content...',
-                    category: 'General'
-                  }, 'FAQs')}
+                  onClick={() => openModal('faqs', null, '/api/faqs', 'FAQs', [
+                    { name: 'question', label: 'Question', type: 'text', required: true },
+                    { name: 'answer', label: 'Answer', type: 'textarea', required: true },
+                    { name: 'category', label: 'Category', type: 'text', required: true }
+                  ], 'Add FAQ')}
                   icon={Plus}
                 >
                   Add FAQ
@@ -803,13 +878,26 @@ export default function AdminPage() {
                       <p className="text-[#D8D5C8] leading-relaxed">{f.answer}</p>
                       <span className="inline-block mt-2 text-[10px] text-[#9B7A41] uppercase font-bold">{f.category}</span>
                     </div>
-                    <button
-                      onClick={() => handleDeleteItem('/api/faqs', f.id, 'FAQs')}
-                      className="p-2 text-red-400 hover:bg-red-950/40 rounded-lg shrink-0"
-                      aria-label="Delete FAQ"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => openModal('faqs', f, '/api/faqs', 'FAQs', [
+                          { name: 'question', label: 'Question', type: 'text', required: true },
+                          { name: 'answer', label: 'Answer', type: 'textarea', required: true },
+                          { name: 'category', label: 'Category', type: 'text', required: true }
+                        ], 'Edit FAQ')}
+                        className="p-2 text-[#9B7A41] hover:bg-[#9B7A41]/10 rounded-lg shrink-0"
+                        aria-label="Edit FAQ"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteItem('/api/faqs', f.id, 'FAQs')}
+                        className="p-2 text-red-400 hover:bg-red-950/40 rounded-lg shrink-0"
+                        aria-label="Delete FAQ"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -824,11 +912,11 @@ export default function AdminPage() {
                 <Button
                   variant="primary"
                   size="sm"
-                  onClick={() => handleAddItem('/api/announcements', {
-                    message: 'New Temple Announcement',
-                    active: true,
-                    type: 'general'
-                  }, 'Announcements')}
+                  onClick={() => openModal('announcements', null, '/api/announcements', 'Announcements', [
+                    { name: 'message', label: 'Announcement Message', type: 'textarea', required: true },
+                    { name: 'type', label: 'Type', type: 'select', options: [{label:'General', value:'general'}, {label:'Urgent', value:'urgent'}, {label:'Event', value:'event'}], required: true },
+                    { name: 'active', label: 'Status', type: 'checkbox', checkboxLabel: 'Active (Show on website)' }
+                  ], 'Add Announcement')}
                   icon={Plus}
                 >
                   Add Announcement
@@ -848,13 +936,26 @@ export default function AdminPage() {
                       <p className="text-[#F7F2E7] font-medium">{a.message}</p>
                       <span className="text-[#9B7A41] capitalize">{a.type}</span>
                     </div>
-                    <button
-                      onClick={() => handleDeleteItem('/api/announcements', a.id, 'Announcements')}
-                      className="p-2 text-red-400 hover:bg-red-950/40 rounded-lg shrink-0"
-                      aria-label="Delete announcement"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => openModal('announcements', a, '/api/announcements', 'Announcements', [
+                          { name: 'message', label: 'Announcement Message', type: 'textarea', required: true },
+                          { name: 'type', label: 'Type', type: 'select', options: [{label:'General', value:'general'}, {label:'Urgent', value:'urgent'}, {label:'Event', value:'event'}], required: true },
+                          { name: 'active', label: 'Status', type: 'checkbox', checkboxLabel: 'Active (Show on website)' }
+                        ], 'Edit Announcement')}
+                        className="p-2 text-[#9B7A41] hover:bg-[#9B7A41]/10 rounded-lg shrink-0"
+                        aria-label="Edit announcement"
+                      >
+                        <Edit className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteItem('/api/announcements', a.id, 'Announcements')}
+                        className="p-2 text-red-400 hover:bg-red-950/40 rounded-lg shrink-0"
+                        aria-label="Delete announcement"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -863,6 +964,15 @@ export default function AdminPage() {
 
         </div>
       </div>
+
+      <ItemModal
+        isOpen={modalConfig.isOpen}
+        onClose={closeModal}
+        onSave={handleSaveModal}
+        item={modalConfig.item}
+        fields={modalConfig.fields}
+        title={modalConfig.title}
+      />
     </div>
   );
 }
