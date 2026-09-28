@@ -4,14 +4,14 @@ import { getSection, updateSection } from '@/lib/dataStore';
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const settings = getSection('settings');
+  const settings = await getSection('settings');
   return NextResponse.json({ success: true, settings });
 }
 
 export async function PUT(request) {
   try {
     const body = await request.json();
-    const success = updateSection('settings', body);
+    const success = await updateSection('settings', body);
     if (success) {
       return NextResponse.json({ success: true, message: 'Settings updated successfully' });
     }
@@ -20,3 +20,4 @@ export async function PUT(request) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
+

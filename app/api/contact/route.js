@@ -4,14 +4,14 @@ import { getSection, updateSection } from '@/lib/dataStore';
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const messages = getSection('messages') || [];
+  const messages = await getSection('messages') || [];
   return NextResponse.json({ success: true, messages });
 }
 
 export async function POST(request) {
   try {
     const body = await request.json();
-    const messages = getSection('messages') || [];
+    const messages = await getSection('messages') || [];
 
     const newMessage = {
       id: 'msg-' + Date.now(),
@@ -25,7 +25,7 @@ export async function POST(request) {
     };
 
     messages.unshift(newMessage);
-    updateSection('messages', messages);
+    await updateSection('messages', messages);
 
     return NextResponse.json({
       success: true,
@@ -35,3 +35,4 @@ export async function POST(request) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
+

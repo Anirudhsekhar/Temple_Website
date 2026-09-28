@@ -4,14 +4,14 @@ import { getSection, updateSection } from '@/lib/dataStore';
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const donations = getSection('donations') || [];
+  const donations = await getSection('donations') || [];
   return NextResponse.json({ success: true, donations });
 }
 
 export async function POST(request) {
   try {
     const body = await request.json();
-    const donations = getSection('donations') || [];
+    const donations = await getSection('donations') || [];
     const receiptId = 'REC-DON-' + Math.floor(100000 + Math.random() * 900000);
 
     const newDonation = {
@@ -26,7 +26,7 @@ export async function POST(request) {
     };
 
     donations.unshift(newDonation);
-    updateSection('donations', donations);
+    await updateSection('donations', donations);
 
     return NextResponse.json({
       success: true,
@@ -37,3 +37,4 @@ export async function POST(request) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
+
