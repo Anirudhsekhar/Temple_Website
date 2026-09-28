@@ -13,7 +13,7 @@ export default function AboutPage() {
   useEffect(() => {
     async function fetchGallery() {
       try {
-        const res = await fetch('/api/gallery');
+        const res = await fetch('', { cache: 'no-store' });
         const data = await res.json();
         if (data.success && data.gallery) {
           setGallery(data.gallery.slice(0, 3));
@@ -212,3 +212,4 @@ export default function AboutPage() {
     </div>
   );
 }
+

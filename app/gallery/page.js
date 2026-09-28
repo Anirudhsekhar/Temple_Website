@@ -13,7 +13,7 @@ export default function GalleryPage() {
   useEffect(() => {
     async function fetchGallery() {
       try {
-        const res = await fetch('/api/gallery');
+        const res = await fetch('', { cache: 'no-store' });
         const data = await res.json();
         if (data.success) {
           // Requirement 16: Remove Rituals category from Gallery
@@ -131,3 +131,4 @@ export default function GalleryPage() {
     </div>
   );
 }
+

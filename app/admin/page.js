@@ -125,15 +125,15 @@ export default function AdminPage() {
     setLoadingData(true);
     try {
       const [c, t, e, p, g, d, m, f, a] = await Promise.all([
-        fetch('/api/content').then(r => r.json()),
-        fetch('/api/timings').then(r => r.json()),
-        fetch('/api/events').then(r => r.json()),
-        fetch('/api/poojas').then(r => r.json()),
-        fetch('/api/gallery').then(r => r.json()),
-        fetch('/api/donations').then(r => r.json()),
-        fetch('/api/contact').then(r => r.json()),
-        fetch('/api/faqs').then(r => r.json()),
-        fetch('/api/announcements').then(r => r.json())
+        fetch('', { cache: 'no-store' }).then(r => r.json()),
+        fetch('', { cache: 'no-store' }).then(r => r.json()),
+        fetch('', { cache: 'no-store' }).then(r => r.json()),
+        fetch('', { cache: 'no-store' }).then(r => r.json()),
+        fetch('', { cache: 'no-store' }).then(r => r.json()),
+        fetch('', { cache: 'no-store' }).then(r => r.json()),
+        fetch('', { cache: 'no-store' }).then(r => r.json()),
+        fetch('', { cache: 'no-store' }).then(r => r.json()),
+        fetch('', { cache: 'no-store' }).then(r => r.json())
       ]);
 
       const timingsArr = t.timings || [];
@@ -976,3 +976,4 @@ export default function AdminPage() {
     </div>
   );
 }
+

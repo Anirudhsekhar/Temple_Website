@@ -9,7 +9,7 @@ export default function ContactPage() {
   useEffect(() => {
     async function fetchSettings() {
       try {
-        const res = await fetch('/api/content');
+        const res = await fetch('', { cache: 'no-store' });
         const data = await res.json();
         if (data.success) {
           setSettings(data.settings || {});
@@ -133,3 +133,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

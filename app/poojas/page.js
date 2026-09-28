@@ -24,7 +24,7 @@ export default function PoojasPage() {
   useEffect(() => {
     async function fetchPoojas() {
       try {
-        const res = await fetch('/api/poojas');
+        const res = await fetch('', { cache: 'no-store' });
         const data = await res.json();
         if (data.success) {
           setPoojas(data.poojas || []);
@@ -162,3 +162,4 @@ export default function PoojasPage() {
     </div>
   );
 }
+

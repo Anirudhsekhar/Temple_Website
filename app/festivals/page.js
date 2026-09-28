@@ -12,7 +12,7 @@ export default function FestivalsPage() {
   useEffect(() => {
     async function fetchEvents() {
       try {
-        const res = await fetch('/api/events');
+        const res = await fetch('', { cache: 'no-store' });
         const data = await res.json();
         if (data.success) {
           setEvents(data.events || []);
@@ -121,3 +121,4 @@ export default function FestivalsPage() {
     </div>
   );
 }
+

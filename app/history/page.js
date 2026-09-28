@@ -15,3 +15,4 @@ export default function HistoryRedirectPage() {
     </div>
   );
 }
+

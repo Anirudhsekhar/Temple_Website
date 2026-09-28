@@ -11,7 +11,7 @@ export default function FaqsPage() {
   useEffect(() => {
     async function fetchFaqs() {
       try {
-        const res = await fetch('/api/faqs');
+        const res = await fetch('', { cache: 'no-store' });
         const data = await res.json();
         if (data.success) {
           setFaqs(data.faqs || []);
@@ -104,3 +104,4 @@ export default function FaqsPage() {
     </div>
   );
 }
+

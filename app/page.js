@@ -29,11 +29,11 @@ export default function HomePage() {
     async function loadData() {
       try {
         const [contentRes, timingsRes, eventsRes, poojasRes, galleryRes] = await Promise.all([
-          fetch('/api/content'),
-          fetch('/api/timings'),
-          fetch('/api/events'),
-          fetch('/api/poojas'),
-          fetch('/api/gallery')
+          fetch('', { cache: 'no-store' }),
+          fetch('', { cache: 'no-store' }),
+          fetch('', { cache: 'no-store' }),
+          fetch('', { cache: 'no-store' }),
+          fetch('', { cache: 'no-store' })
         ]);
 
         const content = await contentRes.json();
@@ -450,3 +450,4 @@ export default function HomePage() {
     </div>
   );
 }
+
