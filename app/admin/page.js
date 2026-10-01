@@ -125,15 +125,15 @@ export default function AdminPage() {
     setLoadingData(true);
     try {
       const [c, t, e, p, g, d, m, f, a] = await Promise.all([
-        fetch('', { cache: 'no-store' }).then(r => r.json()),
-        fetch('', { cache: 'no-store' }).then(r => r.json()),
-        fetch('', { cache: 'no-store' }).then(r => r.json()),
-        fetch('', { cache: 'no-store' }).then(r => r.json()),
-        fetch('', { cache: 'no-store' }).then(r => r.json()),
-        fetch('', { cache: 'no-store' }).then(r => r.json()),
-        fetch('', { cache: 'no-store' }).then(r => r.json()),
-        fetch('', { cache: 'no-store' }).then(r => r.json()),
-        fetch('', { cache: 'no-store' }).then(r => r.json())
+        fetch('/api/content', { cache: 'no-store' }).then(r => r.json()),
+        fetch('/api/timings', { cache: 'no-store' }).then(r => r.json()),
+        fetch('/api/events', { cache: 'no-store' }).then(r => r.json()),
+        fetch('/api/poojas', { cache: 'no-store' }).then(r => r.json()),
+        fetch('/api/gallery', { cache: 'no-store' }).then(r => r.json()),
+        fetch('/api/donations', { cache: 'no-store' }).then(r => r.json()),
+        fetch('/api/contact', { cache: 'no-store' }).then(r => r.json()),
+        fetch('/api/faqs', { cache: 'no-store' }).then(r => r.json()),
+        fetch('/api/announcements', { cache: 'no-store' }).then(r => r.json())
       ]);
 
       const timingsArr = t.timings || [];
