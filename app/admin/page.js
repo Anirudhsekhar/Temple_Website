@@ -124,16 +124,19 @@ export default function AdminPage() {
   const loadAdminData = async () => {
     setLoadingData(true);
     try {
+      const ts = Date.now();
+      const fetchWithTs = (url) => fetch(`${url}?t=${ts}`, { cache: 'no-store' }).then(r => r.json());
+
       const [c, t, e, p, g, d, m, f, a] = await Promise.all([
-        fetch('/api/content', { cache: 'no-store' }).then(r => r.json()),
-        fetch('/api/timings', { cache: 'no-store' }).then(r => r.json()),
-        fetch('/api/events', { cache: 'no-store' }).then(r => r.json()),
-        fetch('/api/poojas', { cache: 'no-store' }).then(r => r.json()),
-        fetch('/api/gallery', { cache: 'no-store' }).then(r => r.json()),
-        fetch('/api/donations', { cache: 'no-store' }).then(r => r.json()),
-        fetch('/api/contact', { cache: 'no-store' }).then(r => r.json()),
-        fetch('/api/faqs', { cache: 'no-store' }).then(r => r.json()),
-        fetch('/api/announcements', { cache: 'no-store' }).then(r => r.json())
+        fetchWithTs('/api/content'),
+        fetchWithTs('/api/timings'),
+        fetchWithTs('/api/events'),
+        fetchWithTs('/api/poojas'),
+        fetchWithTs('/api/gallery'),
+        fetchWithTs('/api/donations'),
+        fetchWithTs('/api/contact'),
+        fetchWithTs('/api/faqs'),
+        fetchWithTs('/api/announcements')
       ]);
 
       const timingsArr = t.timings || [];
@@ -361,8 +364,8 @@ export default function AdminPage() {
                 key={t.id}
                 onClick={() => setActiveTab(t.id)}
                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-colors text-left ${isActive
-                    ? 'bg-[#9B7A41] text-[#0D1A12] font-bold'
-                    : 'bg-[#233728]/50 text-[#D8D5C8] border border-[#5E645A]/50 hover:border-[#9B7A41] hover:text-[#F7F2E7]'
+                  ? 'bg-[#9B7A41] text-[#0D1A12] font-bold'
+                  : 'bg-[#233728]/50 text-[#D8D5C8] border border-[#5E645A]/50 hover:border-[#9B7A41] hover:text-[#F7F2E7]'
                   }`}
               >
                 <Icon className="w-4 h-4 shrink-0" />
@@ -630,7 +633,7 @@ export default function AdminPage() {
                     { name: 'date', label: 'Date', type: 'date', required: true },
                     { name: 'time', label: 'Time', type: 'text', required: true },
                     { name: 'location', label: 'Location', type: 'text', required: true },
-                    { name: 'category', label: 'Category', type: 'select', options: [{label:'Festival', value:'Festival'}, {label:'Event', value:'Event'}], required: true },
+                    { name: 'category', label: 'Category', type: 'select', options: [{ label: 'Festival', value: 'Festival' }, { label: 'Event', value: 'Event' }], required: true },
                     { name: 'description', label: 'Description', type: 'textarea' }
                   ], 'Add Event/Festival')}
                   icon={Plus}
@@ -657,7 +660,7 @@ export default function AdminPage() {
                           { name: 'date', label: 'Date', type: 'date', required: true },
                           { name: 'time', label: 'Time', type: 'text', required: true },
                           { name: 'location', label: 'Location', type: 'text', required: true },
-                          { name: 'category', label: 'Category', type: 'select', options: [{label:'Festival', value:'Festival'}, {label:'Event', value:'Event'}], required: true },
+                          { name: 'category', label: 'Category', type: 'select', options: [{ label: 'Festival', value: 'Festival' }, { label: 'Event', value: 'Event' }], required: true },
                           { name: 'description', label: 'Description', type: 'textarea' }
                         ], 'Edit Event/Festival')}
                         className="p-2 text-[#9B7A41] hover:bg-[#9B7A41]/10 rounded-lg shrink-0"
@@ -914,7 +917,7 @@ export default function AdminPage() {
                   size="sm"
                   onClick={() => openModal('announcements', null, '/api/announcements', 'Announcements', [
                     { name: 'message', label: 'Announcement Message', type: 'textarea', required: true },
-                    { name: 'type', label: 'Type', type: 'select', options: [{label:'General', value:'general'}, {label:'Urgent', value:'urgent'}, {label:'Event', value:'event'}], required: true },
+                    { name: 'type', label: 'Type', type: 'select', options: [{ label: 'General', value: 'general' }, { label: 'Urgent', value: 'urgent' }, { label: 'Event', value: 'event' }], required: true },
                     { name: 'active', label: 'Status', type: 'checkbox', checkboxLabel: 'Active (Show on website)' }
                   ], 'Add Announcement')}
                   icon={Plus}
@@ -940,7 +943,7 @@ export default function AdminPage() {
                       <button
                         onClick={() => openModal('announcements', a, '/api/announcements', 'Announcements', [
                           { name: 'message', label: 'Announcement Message', type: 'textarea', required: true },
-                          { name: 'type', label: 'Type', type: 'select', options: [{label:'General', value:'general'}, {label:'Urgent', value:'urgent'}, {label:'Event', value:'event'}], required: true },
+                          { name: 'type', label: 'Type', type: 'select', options: [{ label: 'General', value: 'general' }, { label: 'Urgent', value: 'urgent' }, { label: 'Event', value: 'event' }], required: true },
                           { name: 'active', label: 'Status', type: 'checkbox', checkboxLabel: 'Active (Show on website)' }
                         ], 'Edit Announcement')}
                         className="p-2 text-[#9B7A41] hover:bg-[#9B7A41]/10 rounded-lg shrink-0"
